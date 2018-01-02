@@ -50,3 +50,55 @@ body {
 #sidebar h3 {
 	color: white;
 }
+
+/* Media Queries */
+@media only screen and (max-width: 400px) {
+	/* For mobile phones: */
+	#titleText {
+		color: red;
+		text-align: center;
+		line-height: 100px;
+		font-size: 35px;
+		font-family: "Baskerville Old Face";
+		font-weight: bold;
+	}
+	#sarassalogo {
+		height: 12.5em;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-35%, -35%);
+		z-index: -999999;
+		opacity: 0.50;
+	}
+	#sidebar {
+		width: 35%;
+		left: 0;
+		background-color: black;
+	}
+}
+@media (max-width:760px) and (min-width:400px) {
+    /* For tablets: */
+	#titleText {
+		color: red;
+		text-align: center;
+		line-height: 100px;
+		font-size: 45px;
+		font-family: "Baskerville Old Face";
+		font-weight: bold;
+	}
+    #sarassalogo {
+		height: 20em;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-45%, -35%);
+		z-index: -999999;
+		opacity: 0.50;
+	}
+	#sidebar {
+		width: 25%;
+		left: 0;
+		background-color: black;
+	}
+}
