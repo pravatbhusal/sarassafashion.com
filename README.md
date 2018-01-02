@@ -1,2 +1,2 @@
-# sarassafashion.com
-Sarassa Fashion website programmed for Sal Khan.
+# Sarassa Fasion
+An e-commerce website programmed for Sal Khan's fashion business.
