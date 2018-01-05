@@ -26,10 +26,10 @@
 	<div id="navbarTop">
 		<a target="_blank" href="https://www.facebook.com/sarassafashion" style="margin-right: 5px"><img width="18" height="18" src="rsrc/index/facebook.png"></a>
 		<a target="_blank" href="https://www.instagram.com/sarassa_official/" style="margin-right: 5px"><img width="18" height="18" src="rsrc/index/instagram.jpg"></a>
-		<a target="_blank" href="" style="margin-right: 100px;"><img width="18" height="18" src="rsrc/index/twitter.jpg"></a>
+		<a target="_blank" href="https://twitter.com/SarassAbiz" style="margin-right: 100px;"><img width="18" height="18" src="rsrc/index/twitter.jpg"></a>
 	</div>
 	<div id="navbarMiddle">
-		<a href="index.php"><p class="center-align" id="titleText">SarassA Fashion</p></a>
+		<p class="center-align" id="titleText"><a id="titleText" href="index.php">SarassA Fashion</a></p>
 	</div>
 	<div id="navbarBottom">
 		<h6 style="margin-right: 123px; color: white;">Search</h6>
