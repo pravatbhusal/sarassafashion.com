@@ -1,0 +1,74 @@
+/* Navbar */
+#navbarHeader {
+	padding: 0;
+	margin: 0;
+	background-color: black;
+	height: 10px;
+	width: 100%;
+}
+#navbarTop {
+	padding: 0;
+	margin: 0;
+	background-color: black;
+	height: auto;
+	width: 100%;
+	display: inline-block;
+	text-align: right;
+}
+#navbarMiddle {
+	padding: 0;
+	margin: 0;
+	background-color: black;
+	height: auto;
+	width: 100%;
+}
+#titleText {
+	margin: 0;
+	padding: 0;
+	color: red;
+	font-size: 60px;
+	font-family: "Baskerville Old Face";
+}
+#navbarBottom {
+	padding: 0;
+	margin: 0;
+	background-color: black;
+	height: auto;
+	width: 100%;
+	display: inline-block;
+	text-align: right;
+}
+
+/* Navbar and Body Seperation */
+#seperator {
+	padding: 0;
+	margin: 0;
+	line-height: 1em;
+	background-color: white;
+	height: 5px;
+	width: 100%;
+}
+
+/* Body */
+body {
+	background-color: red;
+}
+#sarassalogo {
+	height: 25em;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, 25%);
+	z-index: -999999;
+}
+#itemBTN {
+	background-color: black;
+}
+
+/* Media Queries */
+@media only screen and (max-width: 400px) {
+	/* For mobile phones: */
+}
+@media (max-width:760px) and (min-width:400px) {
+    /* For tablets: */
+}
