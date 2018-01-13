@@ -1,9 +1,9 @@
 <html>
 <body>
 <header>
-	<title>Events | Buy Cultural Fashion Online USA</title>
+	<title>Search | Buy Cultural Fashion Online USA</title>
 	<!--style.css, favcon, googlefont, materializecss-->
-	<link href="styles/events_style.css" type="text/css" rel="stylesheet">
+	<link href="styles/categories_style.css" type="text/css" rel="stylesheet">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
@@ -57,17 +57,69 @@
 		<a href="events.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Events</a>
 	</div>
 	
-	<div class="container" style="margin: auto">
-  	<!-- Photo Carousel -->
-    <div class="carousel carousel-slider center" data-indicators="true">
-		<a class="carousel-item" href="#one!"><img src="rsrc/index/caro1.jpg"></a>
-		<a class="carousel-item" href="#two!"><img src="rsrc/index/caro2.jpg"></a>
-		<a class="carousel-item" href="#three!"><img src="rsrc/index/caro3.jpg"></a>
-		<a class="carousel-item" href="#four!"><img src="rsrc/index/caro4.jpg"></a>
+	<!-- New Products + Show More -->
+	<div class="container">
+	<p class="center-align" id="new-title-text">- Search Results -</p>
+	<div class="row center">
+	<?php	
+		include_once("db/dbconnection.php");
+		$foundResult = false;
+		
+		//get queries that contain the search string (MySQL is case-insensitive)
+		$search = $_GET['search'];
+		$queryNew = "SELECT * FROM new WHERE name LIKE '%" . $search . "%'";
+		$queryJewelry = "SELECT * FROM jewelry WHERE name LIKE '%" . $search . "%'";
+		$queryMen = "SELECT * FROM men WHERE name LIKE '%" . $search . "%'";
+		$querySales = "SELECT * FROM sales WHERE name LIKE '%" . $search . "%'";
+		$queryWomen = "SELECT * FROM women WHERE name LIKE '%" . $search . "%'";
+		
+		$results = array();
+		$results[] = mysqli_query($link, $queryNew);
+		$results[] = mysqli_query($link, $queryJewelry);
+		$results[] = mysqli_query($link, $queryMen);
+		$results[] = mysqli_query($link, $querySales);
+		$results[] = mysqli_query($link, $queryWomen);
+		
+		for($i = 0; $i < 5; $i ++) {
+			while($row = mysqli_fetch_array($results[$i])) {	
+				$id = $row['id'];
+				$category = $row['category'];
+				$name = $row['name'];
+				$price = $row['price'];
+				$sizes = $row['sizes'];
+				$description = $row['description'];
+				$picture = $row['picture'];
+				echo '
+				<div class="col s12 m6 l6 xl3">
+					<div class="image-container">
+					  <img src="'.$picture.'" class="image">
+					  <div class="image-title">
+						'.$name.'
+					  </div>
+					  <div class="image-price">
+						$'.$price.' USD
+					  </div>
+					  <a href="view.php?category='.$category.'&id='.$id.'"><div class="image-button">
+						<div class="image-text">Choose Options</div>
+					  </div></a>
+					</div>
+				</div>
+				';
+				$foundResult = true;
+			}
+		}
+		?>	
+		</ul>
 	</div>
-	
-	<!--SarassA Logo-->
-	<img src="rsrc/index/sarassaalphalogo.png" id="sarassalogo">
+	<?php 
+		if($foundResult == false) {
+			echo '<h5 style="color: white">No results found...</h5>';
+		} else {
+			//SarassA Logo
+			echo '<img src="rsrc/index/sarassaalphalogo.png" id="sarassalogo">';
+		}
+	?>
+	</div>
 </main>
 <footer class="page-footer" id="footer-page">
 	<div class="container">
@@ -118,7 +170,14 @@
 </footer>
             
 <script>
-  $('.carousel.carousel-slider').carousel();
+
+//if we're on the first page or less, then add certain classes for the previous button
+if(document.getElementById("currentPage").value <= 1) {
+	document.getElementById("previousPage").className += "disabled";
+	document.getElementById("previousPageHref").removeAttribute("href");
+} else {
+	document.getElementById("previousPage").className += "waves-effect";
+}
 </script>
 </body>
 </html>

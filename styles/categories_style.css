@@ -76,9 +76,6 @@ main {
 	transform: translate(-50%, 25%);
 	z-index: -999999;
 }
-.carousel .carousel-item {
-	width: 300px !important;
-}
 #link-btn {
 	background-color: black;
 }
@@ -87,39 +84,7 @@ main {
 	font-family: Courier New;
 	font-size: 16px;
 }
-#jewelry-item-photo {
-	position: relative;
-	background-image: url("../rsrc/index/jewelry.jpg");
-    background-repeat: no-repeat;
-	background-size: 100% 300px;
-	text-align: center;
-	color : white;
-	font-size: 18px;
-	font-family: Century Gothic, sans-serif;
-	width: 100%;
-	height: 300px;
-}
-#women-item-photo {
-	position: relative;
-	background-image: url("../rsrc/index/womenclothing.jpg");
-    background-repeat: no-repeat;
-	background-size: 100% 300px;
-	text-align: center;
-	color : white;
-	font-size: 18px;
-	font-family: Century Gothic, sans-serif;
-	width: 100%;
-	height: 300px;
-}
-#sales-item-photo {
-	position: relative;
-	background-image: url("../rsrc/index/sales.jpg");
-    background-repeat: no-repeat;
-	background-size: 100% 300px;
-	text-align: center;
-	color : white;
-	font-size: 18px;
-	font-family: Century Gothic, sans-serif;
+#three-item-photo {
 	width: 100%;
 	height: 300px;
 }
@@ -139,7 +104,7 @@ main {
 	font-size: 24px;
 }
 
-/* New Items */
+/* Items */
 .image-container {
 	position: relative;
 	width: 210px;
@@ -226,7 +191,17 @@ main {
 /* Media Queries */
 @media (max-width: 992px) and (min-width: 600px) {
 	/* Medium (Tablets) */
+	#three-item-photo {
+		width: 300px;
+		height: 300px;
+		margin-top: 10px;
+	}
 }
 @media only screen and (max-width: 600px) {
 	/* Small (Mobile Phones) */
+	#three-item-photo {
+		width: 225px;
+		height: 225px;
+		margin-top: 10px;
+	}
 }
