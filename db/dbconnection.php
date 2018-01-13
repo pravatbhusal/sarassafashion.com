@@ -1,5 +1,5 @@
 <?php
-require_once("admin.php");
+require_once("info.php");
 
 //database credentials
 $host = "localhost";

@@ -1,9 +1,9 @@
 <html>
 <body>
 <header>
-	<title>Men's Clothing | Buy Cultural Fashion Online USA</title>
+	<title>View Item | Buy Cultural Fashion Online USA</title>
 	<!--style.css, favcon, googlefont, materializecss-->
-	<link href="styles/categories_style.css" type="text/css" rel="stylesheet">
+	<link href="styles/index_style.css" type="text/css" rel="stylesheet">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
@@ -56,70 +56,6 @@
 		<a href="sales.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Sales</a>
 		<a href="events.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Events</a>
 	</div>
-	
-	<!-- New Products + Show More -->
-	<div class="container">
-	<p class="center-align" id="new-title-text">- Men's Clothing -</p>
-	<div class="row center">
-	<?php	
-	$item = array();
-	include_once("db/dbconnection.php");
-	if(isset($_GET['page'])) {
-		if($_GET['page'] > 0) {
-			$pageIndex = $_GET['page'] - 1;
-		} else {
-			$pageIndex = 0;	
-		}
-	} else {
-		$pageIndex = 0;
-	}
-	$viewItems = ($pageIndex * 12) . "," . ($pageIndex + 12); //get 12 items from the current page
-	$query = "SELECT * FROM men ORDER by id DESC LIMIT " . $viewItems;
-	$result = mysqli_query($link, $query);
-	while($row = mysqli_fetch_array($result)) {
-		$item[] = $row;
-	}
-	for($i = 0; $i < count($item); $i++) {
-		$id = $item[$i]['id'];
-		$category = $item[$i]['category'];
-		$name = $item[$i]['name'];
-		$price = $item[$i]['price'];
-		$sizes = $item[$i]['sizes'];
-		$description = $item[$i]['description'];
-		$picture = $item[$i]['picture'];
-		echo '
-		<div class="col s12 m6 l6 xl3">
-			<div class="image-container">
-			  <img src="'.$picture.'" class="image">
-			  <div class="image-title">
-				'.$name.'
-			  </div>
-			  <div class="image-price">
-				$'.$price.' USD
-			  </div>
-			  <a href="view.php?category='.$category.'&id='.$id.'"><div class="image-button">
-				<div class="image-text">Choose Options</div>
-			  </div></a>
-			</div>
-		</div>
-		';
-	}
-	?>
-	</div>
-	<?php 
-		if(count($item) <= 0) {
-			echo '<h5 style="color: white">No results found...</h5>';
-		} else {
-			//SarassA Logo
-			echo '<img src="rsrc/index/sarassaalphalogo.png" id="sarassalogo">';
-		}
-	?>
-	<ul class="pagination" align="center">
-		<li id="previousPage"><a id="previousPageHref" href="?page=<?php echo($pageIndex)?>"><i style="color: white;" class="material-icons">chevron_left</i></a></li>
-		<li style="color: white;" id="currentPage" value="<?php echo($pageIndex +1)?>"><?php echo($pageIndex +1)?></li>
-		<li id="nextPage" class="waves-effect"><a href="?page=<?php echo($pageIndex +2)?>"><i style="color: white;" class="material-icons">chevron_right</i></a></li>
-	</ul>
-	</div>
 </main>
 <footer class="page-footer" id="footer-page">
 	<div class="container">
@@ -170,14 +106,6 @@
 </footer>
             
 <script>
-
-//if we're on the first page or less, then add certain classes for the previous button
-if(document.getElementById("currentPage").value <= 1) {
-	document.getElementById("previousPage").className += "disabled";
-	document.getElementById("previousPageHref").removeAttribute("href");
-} else {
-	document.getElementById("previousPage").className += "waves-effect";
-}
 </script>
 </body>
 </html>

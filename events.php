@@ -58,8 +58,9 @@
 	</div>
 	
 	<div class="container" style="margin: auto">
+	<p class="center-align" id="new-title-text">- Events -</p>
   	<!-- Photo Carousel -->
-    <div class="carousel carousel-slider center" data-indicators="true">
+    <div style="margin-bottom: 25px;" class="carousel carousel-slider center" data-indicators="true">
 		<a class="carousel-item" href="#one!"><img src="rsrc/index/caro1.jpg"></a>
 		<a class="carousel-item" href="#two!"><img src="rsrc/index/caro2.jpg"></a>
 		<a class="carousel-item" href="#three!"><img src="rsrc/index/caro3.jpg"></a>

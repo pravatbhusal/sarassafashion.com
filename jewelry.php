@@ -1,7 +1,7 @@
 <html>
 <body>
 <header>
-	<title>New | Buy Cultural Fashion Online USA</title>
+	<title>Jewelry | Buy Cultural Fashion Online USA</title>
 	<!--style.css, favcon, googlefont, materializecss-->
 	<link href="styles/categories_style.css" type="text/css" rel="stylesheet">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -59,7 +59,7 @@
 	
 	<!-- New Products + Show More -->
 	<div class="container">
-	<p class="center-align" id="new-title-text">- New Arrivals -</p>
+	<p class="center-align" id="new-title-text">- Jewelry -</p>
 	<div class="row center">
 	<?php	
 	$item = array();
@@ -73,8 +73,8 @@
 	} else {
 		$pageIndex = 0;
 	}
-	$viewItems = ($pageIndex * 15) . "," . ($pageIndex + 15); //get 15 items from the current page
-	$query = "SELECT * FROM new ORDER by id DESC LIMIT " . $viewItems;
+	$viewItems = ($pageIndex * 12) . "," . ($pageIndex + 12); //get 12 items from the current page
+	$query = "SELECT * FROM jewelry ORDER by id DESC LIMIT " . $viewItems;
 	$result = mysqli_query($link, $query);
 	while($row = mysqli_fetch_array($result)) {
 		$item[] = $row;

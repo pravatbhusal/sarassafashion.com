@@ -73,7 +73,7 @@
 	} else {
 		$pageIndex = 0;
 	}
-	$viewItems = ($pageIndex * 15) . "," . ($pageIndex + 15); //get 15 items from the current page
+	$viewItems = ($pageIndex * 12) . "," . ($pageIndex + 12); //get 12 items from the current page
 	$query = "SELECT * FROM new ORDER by id DESC LIMIT " . $viewItems;
 	$result = mysqli_query($link, $query);
 	while($row = mysqli_fetch_array($result)) {
