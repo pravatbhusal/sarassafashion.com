@@ -1,7 +1,7 @@
 <html>
 <body>
 <header>
-	<title>New Arrivals | Buy Cultural Fashion Online USA</title>
+	<title>Checkout | Buy Cultural Fashion Online USA</title>
 	<!--style.css, favcon, googlefont, materializecss-->
 	<link href="styles/categories_style.css" type="text/css" rel="stylesheet">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -12,6 +12,18 @@
 	<!--jquery, materializejs-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<script>
+		//javascript is above here so that the php code can read the newItem() function
+			var items = new Array();
+			//records new item values into an array
+			function newItem(itemNumber) {
+				var item = document.getElementById("item_" + itemNumber);
+				var itemName = item.getAttribute("data-itemName");
+				var itemQuantity = item.getAttribute("data-itemQuantity");
+				var itemPrice = item.getAttribute("data-itemPrice");
+				items.push({number: itemNumber, name: itemName, quantity: itemQuantity, price: itemPrice});
+			}
+	</script>
 	
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,11 +42,6 @@
 	</div>
 	<div id="navbarMiddle">
 		<h4 id="titleText"><a id="titleText" href="index.php">SarassA Fashion</a></h4>
-	</div>
-	<div id="checkOutNav">
-		<a style="color: white; margin-right: 125px;" href="checkout.php">
-		<i style="color: white;" class="material-icons">shopping_cart</i>
-		<label style="color: white;" id="cart-number">0</label></a>
 	</div>
 	<div id="navbarBottom">
 		<form id="searchForm" method="GET" action="search.php">
@@ -71,68 +78,73 @@
 		<a href="events.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Events</a>
 	</div>
 	
-	<!-- Items -->
-	<div class="container">
-	<p class="center-align" id="new-title-text">- New Arrivals -</p>
-	<div class="row center">
-	<?php	
-	$item = array();
-	include_once("db/dbconnection.php");
-	if(isset($_GET['page'])) {
-		if($_GET['page'] > 0) {
-			$pageIndex = $_GET['page'] - 1;
-		} else {
-			$pageIndex = 0;	
-		}
-	} else {
-		$pageIndex = 0;
-	}
-	$viewItems = ($pageIndex * 12) . "," . ($pageIndex + 12); //get 12 items from the current page
-	$query = "SELECT * FROM new ORDER by id DESC LIMIT " . $viewItems;
-	$result = mysqli_query($link, $query);
-	while($row = mysqli_fetch_array($result)) {
-		$item[] = $row;
-	}
-	for($i = 0; $i < count($item); $i++) {
-		$id = $item[$i]['id'];
-		$category = $item[$i]['category'];
-		$name = $item[$i]['name'];
-		$price = $item[$i]['price'];
-		$sizes = $item[$i]['sizes'];
-		$description = $item[$i]['description'];
-		$picture = $item[$i]['picture'];
-		echo '
-		<div class="col s12 m6 l6 xl3">
-			<div class="image-container">
-			  <img src="'.$picture.'" class="image">
-			  <div class="image-title">
-				'.$name.'
-			  </div>
-			  <div class="image-price">
-				$'.$price.' USD
-			  </div>
-			  <a href="view.php?category='.$category.'&id='.$id.'"><div class="image-button">
-				<div class="image-text">Choose Options</div>
-			  </div></a>
-			</div>
-		</div>
-		';
-	}
-	?>
-	</div>
-	<?php 
-		if(count($item) <= 0) {
-			echo '<h5 style="color: white">No results found...</h5>';
-		} else {
-			//SarassA Logo
-			echo '<img src="rsrc/index/sarassaalphalogo.png" id="sarassalogo">';
-		}
-	?>
-	<ul class="pagination" align="center">
-		<li id="previousPage"><a id="previousPageHref" href="?page=<?php echo($pageIndex)?>"><i style="color: white;" class="material-icons">chevron_left</i></a></li>
-		<li style="color: white;" id="currentPage" value="<?php echo($pageIndex +1)?>"><?php echo($pageIndex +1)?></li>
-		<li id="nextPage" class="waves-effect"><a href="?page=<?php echo($pageIndex +2)?>"><i style="color: white;" class="material-icons">chevron_right</i></a></li>
-	</ul>
+	<!-- Checkout -->
+	<div class="container" id="itemContainer">
+		<ul class="collection" style="background-color: rgba(0, 0, 0, 0); border: none;">
+			<?php 
+				include_once("db/dbconnection.php");
+				$containsItems = false;
+				$i = 0;
+				$totalPrice = 0;
+				foreach ($_COOKIE as $item=>$quantity) {
+					//check if the cookie is one of the niche items
+					if(strpos($item, 'item_') !== false) {
+						$itemArray = explode("_", $item); //0 = "item", 1 = id, 2 = item category, 3 = size
+						$query = "SELECT * FROM " . $itemArray[2] . " WHERE id = " . $itemArray[1];
+						$result = mysqli_query($link, $query);
+						
+						$row = mysqli_fetch_array($result);
+						$itemId = $itemArray[1];
+						$itemName = $row['name'];
+						$Price = $row['price'];
+						$itemIcon = $row['picture'];
+						$size = $itemArray[3];
+							echo '
+							<li id="item_'.$i.'" data-itemName='.$item.' data-itemQuantity='.$quantity.' data-itemPrice='.$Price.' class="collection-item avatar" style="margin-top: 10px; background-color: rgba(0, 0, 0, 0);">
+							<div class="row">
+								<div class="col s12 m12 l3">
+								  <i><img class="materialboxed" src="'.$itemIcon.'" style="width: 125px; height: 150px; border-radius: 5px;"></i>
+								</div>
+								<div class="col s12 m12 l9">
+								  <p style="color: white;"><b>'.$itemName.'</b><span> x '.$quantity.'</span></p>
+								  <p style="color: white;">$'.$Price.' USD</p>
+								  <p style="color: white;">Size: '.$size.'</p>
+								  <p><a onclick="removeCart('.$i.')" class="waves-effect waves-light btn" style="background: black;">Remove</a></p>
+								</div>
+							</div>
+							</li>'; 
+							
+							echo '<script type="text/javascript">',
+								 'newItem('.$i.');',
+								 '</script>';
+								 
+						$containsItems = true;
+						$totalPrice += $Price * $quantity;
+						$i++;
+					}
+				}
+			?>
+		</ul>
+		<?php
+			if($containsItems == false) {
+				echo '<h5 style="color: white">Your cart is empty!</h5>';	
+			} else {
+				echo '
+				<form id="paypalForm" method="POST" action="https://www.paypal.com/cgi-bin/webscr">
+				<button id="paypalBTN" onclick="paypalCheckOut('.$shippingFeeUSD.')" style="float: left; background-color: #0c0c0c;" class="btn waves-effect waves-light" value="PayPal">
+					Purchase
+					<i class="material-icons right">arrow_forward</i>
+				</button>
+				<input type="hidden" name="cmd" value="_cart">
+				<input type="hidden" name="upload" value="1">
+				<input type="hidden" name="business" value="'.$adminEmail.'">
+				<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$totalPrice.'">$'.$totalPrice.' USD</h4>
+				<br>
+				<label style="color: white">Shipping fees may apply</label>
+				</form>
+				';
+			}
+		?>
 	</div>
 </main>
 <footer class="page-footer" id="footer-page">
@@ -197,23 +209,54 @@
 		}
 	);
 	
-	//if we're on the first page or less, then add certain classes for the previous button
-	if(document.getElementById("currentPage").value <= 1) {
-		document.getElementById("previousPage").className += "disabled";
-		document.getElementById("previousPageHref").removeAttribute("href");
-	} else {
-		document.getElementById("previousPage").className += "waves-effect";
+	function paypalCheckOut(shippingCost) {
+		//add the paypal form information based on the number of items in the array
+		for (var i = 0; i < items.length; i ++) {						
+			document.getElementById("paypalForm").innerHTML += '<input form="paypalForm" type="hidden" name="item_name_' + (i + 1) + '" value="' + items[i].name + '">';
+			document.getElementById("paypalForm").innerHTML += '<input form="paypalForm" type="hidden" name="amount_' + (i + 1) + '" value="' + items[i].price + '">';
+			document.getElementById("paypalForm").innerHTML += '<input form="paypalForm" type="hidden" name="quantity_' + (i + 1) + '" value="' + items[i].quantity + '">';
+			document.getElementById("paypalForm").innerHTML += '<input form="paypalForm" type="hidden" name="shipping_' + (i + 1) + '" value="' + shippingCost + '">';
+		}
+		document.getElementById('paypalForm').submit(); //submit the form
 	}
 
-	//get number of cart items within the browser
-	function updateNumberOfCartItems() {
+	//deletes a cookie based on the name
+	function delete_cookie(name) {
+		document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+	}
+
+	function removeCart(itemNumber) {
+		var item = document.getElementById("item_" + itemNumber);
+		var itemName = item.getAttribute("data-itemName");
+		var itemQuantity = item.getAttribute("data-itemQuantity");
+		var itemPrice = item.getAttribute("data-itemPrice");
+		delete_cookie(itemName);
+		item.parentNode.removeChild(item); //remove the item
+		items.splice(itemNumber, 1); //removes the item from the items array for PayPal checkout
+
+		//update the total price
+		var totalPriceText = document.getElementById("totalPrice");
+		var totalPrice = totalPriceText.getAttribute("data-totalPrice");
+		totalPrice -= itemPrice * itemQuantity;
+		document.getElementById("totalPrice").innerHTML = "$" + totalPrice + " USD";
+		document.getElementById("totalPrice").setAttribute("data-totalPrice", totalPrice);
+
+		//get number of cart items within the browser
 		var numberOfCartItems = 0;
 		numberOfCartItems += (document.cookie.split('item_').length - 1);
-		//set the number of items in the cart
-		document.getElementById('cart-number').innerHTML = numberOfCartItems;
-	}
 
-	updateNumberOfCartItems();
+		//if number of cart items are empty, then notify the user
+		if(numberOfCartItems == 0) {
+			var container = document.getElementById("itemContainer");
+			var emptyParagraph = document.createElement("p");
+			emptyParagraph.setAttribute("style", "color: white;");
+			var node = document.createTextNode("No items in the checkout...");
+			emptyParagraph.appendChild(node);
+			container.appendChild(emptyParagraph);
+			//remove the form
+			document.getElementById("paypalForm").parentNode.removeChild(document.getElementById("paypalForm"));
+		}
+	}
 </script>
 </body>
 </html>

@@ -85,35 +85,42 @@ main {
 	transform: translate(-50%, 25%);
 	z-index: -999999;
 }
-.carousel .carousel-item {
-	width: 300px !important;
-}
 #link-btn {
 	background-color: black;
 }
-#shipping-text {
+#toast-container {
+	top: auto !important;
+	right: auto !important;
+	bottom: 0%;
+}
+
+/* Item */
+#item-title-text {
+	padding: 0;
+	margin-top: 0;
+	margin-top: 0;
+	font-size: 32px;
+	font-family: "Baskerville Old Face";
 	color: white;
-	font-family: Courier New;
+}
+#price-item-text {
+	padding: 0;
+	margin-top: 0;
+	margin-top: 0;
+	font-size: 20px;
+	font-family: "Baskerville Old Face";
+	color: white;
+}
+#sub-item-text {
+	padding: 0;
+	margin-top: 0;
+	margin-top: 0;
 	font-size: 16px;
-}
-#three-item-photo {
-	width: 100%;
-	height: 300px;
-}
-#about-title-text {
+	font-family: "Baskerville Old Face";
 	color: white;
-	font-family: Century Gothic, sans-serif;
-	font-size: 30px;
 }
-#about-text {
-	color: white;
-	font-family: Courier New;
-	font-size: 13px;
-}
-#new-title-text {
-	color: white;
-	font-family: Century Gothic, sans-serif;
-	font-size: 24px;
+#collapsible {
+	background-color: white;
 }
 
 /* Footer */
@@ -135,17 +142,7 @@ main {
 /* Media Queries */
 @media (max-width: 992px) and (min-width: 600px) {
 	/* Medium (Tablets) */
-	#three-item-photo {
-		width: 300px;
-		height: 300px;
-		margin-top: 10px;
-	}
 }
 @media only screen and (max-width: 600px) {
 	/* Small (Mobile Phones) */
-	#three-item-photo {
-		width: 225px;
-		height: 225px;
-		margin-top: 10px;
-	}
 }

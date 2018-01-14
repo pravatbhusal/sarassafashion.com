@@ -16,11 +16,10 @@
 	text-align: right;
 }
 #navbarMiddle {
-	padding: 0;
-	margin: 0;
 	background-color: black;
 	height: auto;
-	width: 100%;
+	margin: 0;
+	padding: 0;
 }
 #titleText {
 	margin: 0;
@@ -28,6 +27,16 @@
 	color: red;
 	font-size: 60px;
 	font-family: "Baskerville Old Face";
+	text-align: center;
+}
+#checkOutNav {
+	padding: 0;
+	margin: 0;
+	background-color: black;
+	height: auto;
+	width: 100%;
+	display: inline-block;
+	text-align: right
 }
 #navbarBottom {
 	padding: 0;
@@ -45,7 +54,7 @@
 	padding-right: 35px;
 }
 .material-icons, .icon-text {
-      vertical-align: middle;
+	vertical-align: middle;
 }
 
 /* Navbar and Body Seperation */
