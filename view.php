@@ -83,6 +83,7 @@
 			$id = $item['id'];
 			$name = $item['name'];
 			$category = $item['category'];
+			$capitalCategory = ucfirst($category);
 			$price = $item['price'];
 			$sizes = explode(",", $item['sizes']);
 			$description = $item['description'];
@@ -94,7 +95,8 @@
 					<img class="materialboxed" src="'.$picture.'" width="310" height="400">
 				</div>
 				<div class="col s12 m12 l7 xl7">
-					<h4 class="left-align" data-id="'.$id.'" data-category="'.$category.'" id="item-title-text">'.$name.'</h4>
+					<h4 class="left-align" id="price-item-text">id #'.$id.'</h4>
+					<h4 class="left-align" data-id="'.$id.'" data-category="'.$category.'" id="item-title-text">'.$name.' - '.$capitalCategory.'</h4>
 					<h4 class="left-align" id="price-item-text">$'.$price.' USD</h4>
 					<h4 class="left-align" id="sub-item-text">Size:</h4>
 					<select id="sizeValue" class="browser-default">
