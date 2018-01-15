@@ -86,10 +86,14 @@
 		}
 		for($i = 0; $i < count($event); $i++) {
 			$eventPicture = $event[$i]['picture'];
-			echo '<a class="carousel-item"><img src="'.$eventPicture.'"></a>';
+			$eventName = $event[$i]['name'];
+			$eventId = $event[$i]['id'];
+			echo '<a class="carousel-item" data-id="'.$eventId.'" data-name="'.$eventName.'"><img src="'.$eventPicture.'"></a>';
 		}
 	?>
 	</div>
+	
+	<p id="eventName" style="text-align: center; color: white;"></p>
 	
 	<!--SarassA Logo-->
 	<img src="rsrc/index/sarassaalphalogo.png" id="sarassalogo">
@@ -156,7 +160,19 @@
 		}
 	);
 	
-  $('.carousel.carousel-slider').carousel();
+  $('.carousel.carousel-slider').carousel({
+	onCycleTo: function(data) {
+		//set event's texts to equal to the event's name and id when the carousel is scrolling
+		var eventName = $(data).data("name");
+		var eventId = $(data).data("id");
+		//check if the variables are not undefined
+		if(eventName && eventId) {
+			document.getElementById("eventName").innerHTML = eventName + " - id #" + eventId;
+		} else {
+			document.getElementById("eventName").innerHTML = "";
+		}
+	}
+  });
   
 	//get number of cart items within the browser
 	function updateNumberOfCartItems() {

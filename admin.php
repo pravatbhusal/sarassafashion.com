@@ -92,6 +92,19 @@
 			</div>
 		</div>
 		
+		<!--delete event modal-->
+		<div id="delete-event-modal" class="modal">
+			<div class="modal-content">
+				<div class="row">
+					<form action="db/deleteevent.php" method="POST">
+					<b><p style="text-align: center;" class="input-field col s12 m12 l12">Delete an Event</p></b>
+						<input required name="eventId" class="input-field col s12 m12 l12" type="text"  placeholder="Event Id" style="width: 500px;"></input>
+						<button type="submit" class="btn input-field col s12 m12 l12">Delete</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		
 		<!--add coupon modal-->
 		<div id="add-coupon-modal" class="modal">
 			<div class="modal-content">
@@ -141,6 +154,8 @@
 			
 			<hr width="500px">
 			<button href="#upload-event-modal" class="modal-trigger btn" style="margin-bottom: 10px;">Add an Event</button>
+			<br>
+			<button href="#delete-event-modal" class="modal-trigger btn" style="margin-bottom: 10px; background-color: #e53935;">Delete an Event</button>
 			<br>
 			
 			<hr width="500px">
