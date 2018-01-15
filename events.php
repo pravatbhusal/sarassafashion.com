@@ -85,15 +85,17 @@
 			$event[] = $row;
 		}
 		for($i = 0; $i < count($event); $i++) {
-			$eventPicture = $event[$i]['picture'];
-			$eventName = $event[$i]['name'];
 			$eventId = $event[$i]['id'];
-			echo '<a class="carousel-item" data-id="'.$eventId.'" data-name="'.$eventName.'"><img src="'.$eventPicture.'"></a>';
+			$eventExpires = $event[$i]['expires'];
+			$eventName = $event[$i]['name'];
+			$eventPicture = $event[$i]['picture'];
+			echo '<a class="carousel-item" data-id="'.$eventId.' "data-expires="'.$eventExpires.'" data-name="'.$eventName.'"><img src="'.$eventPicture.'"></a>';
 		}
 	?>
 	</div>
 	
 	<p id="eventName" style="text-align: center; color: white;"></p>
+	<p id="eventExpires" style="text-align: center; color: white;"></p>
 	
 	<!--SarassA Logo-->
 	<img src="rsrc/index/sarassaalphalogo.png" id="sarassalogo">
@@ -165,11 +167,14 @@
 		//set event's texts to equal to the event's name and id when the carousel is scrolling
 		var eventName = $(data).data("name");
 		var eventId = $(data).data("id");
+		var eventExpires = $(data).data("expires");
 		//check if the variables are not undefined
-		if(eventName && eventId) {
+		if(eventName && eventId && eventExpires) {
 			document.getElementById("eventName").innerHTML = eventName + " - id #" + eventId;
+			document.getElementById("eventExpires").innerHTML = "Expires: " + eventExpires;
 		} else {
 			document.getElementById("eventName").innerHTML = "";
+			document.getElementById("eventExpires").innerHTML = "";
 		}
 	}
   });
