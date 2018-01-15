@@ -82,9 +82,9 @@
 			
 			$id = $item['id'];
 			$name = $item['name'];
-			$category = $item['category'];
 			$capitalCategory = ucfirst($category);
 			$price = $item['price'];
+			$saleprice = $item['saleprice'];
 			$sizes = explode(",", $item['sizes']);
 			$description = $item['description'];
 			$picture = $item['picture'];
@@ -97,15 +97,24 @@
 				<div class="col s12 m12 l7 xl7">
 					<h4 class="left-align" id="price-item-text">id #'.$id.'</h4>
 					<h4 class="left-align" data-id="'.$id.'" data-category="'.$category.'" id="item-title-text">'.$name.' - '.$capitalCategory.'</h4>
-					<h4 class="left-align" id="price-item-text">$'.$price.' USD</h4>
+					<h4 class="left-align" id="price-item-text">
+			';
+					//check if the item as a sale price
+					if($saleprice > 0) {
+						echo '<del>$'.$price.' USD</del> $'.$saleprice.' USD';
+					} else {
+						echo '$'.$price.' USD';
+					}
+			echo '
+					</h4>
 					<h4 class="left-align" id="sub-item-text">Size:</h4>
 					<select id="sizeValue" class="browser-default">
 						<option value="0" disabled selected>- Please choose a size -</option>
 			';
-						//add options for the available sizes
-						for($i = 0; $i < count($sizes); $i++) {
-							echo '<option value="'.$sizes[$i].'">'.$sizes[$i].'</option>';
-						}
+					//add options for the available sizes
+					for($i = 0; $i < count($sizes); $i++) {
+						echo '<option value="'.$sizes[$i].'">'.$sizes[$i].'</option>';
+					}
 			echo '
 					</select>
 					<br>
@@ -176,18 +185,18 @@
 			<div class="col s12 m6 l3 xl3">
 				<h5 id="footer-header-text"><span><i class="material-icons" style="margin-right: 5px">link</i></span>Quick Links</h5>
 				<ul>
-				<li><a id="footer-sub-text" href="anime.php">Privacy Policy</a></li>
+				<li><a id="footer-sub-text" href="privacy.php">Privacy Policy</a></li>
 				</ul>
 			</div>
 			<div class="col s12 m6 l3 xl3">
 				<h5 id="footer-header-text"><span><i class="material-icons" style="margin-right: 5px">assignment</i></span>Categories</h5>
 				<ul>
-				<li><a id="footer-sub-text" href="anime.php">New Arrivals</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Women's Clothing</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Men's Clothing</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Jewelry</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Sales</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Events</a></li>
+				<li><a id="footer-sub-text" href="new.php">New Arrivals</a></li>
+				<li><a id="footer-sub-text" href="women.php">Women's Clothing</a></li>
+				<li><a id="footer-sub-text" href="men.php">Men's Clothing</a></li>
+				<li><a id="footer-sub-text" href="jewelry.php">Jewelry</a></li>
+				<li><a id="footer-sub-text" href="sales.php">Sales</a></li>
+				<li><a id="footer-sub-text" href="events.php">Events</a></li>
 				</ul>
 			</div>
 			<div class="col s12 m6 l3 xl3">

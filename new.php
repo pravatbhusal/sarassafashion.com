@@ -78,26 +78,18 @@
 	<?php	
 	$item = array();
 	include_once("db/dbconnection.php");
-	if(isset($_GET['page'])) {
-		if($_GET['page'] > 0) {
-			$pageIndex = $_GET['page'] - 1;
-		} else {
-			$pageIndex = 0;	
-		}
-	} else {
-		$pageIndex = 0;
-	}
-	$viewItems = ($pageIndex * 12) . "," . ($pageIndex + 12); //get 12 items from the current page
-	$query = "SELECT * FROM new ORDER by id DESC LIMIT " . $viewItems;
+	//limit to 36 newest items
+	$query = "SELECT * FROM new ORDER by id DESC LIMIT 36";
 	$result = mysqli_query($link, $query);
 	while($row = mysqli_fetch_array($result)) {
 		$item[] = $row;
 	}
 	for($i = 0; $i < count($item); $i++) {
-		$id = $item[$i]['id'];
+		$categoryid = $item[$i]['categoryid'];
 		$category = $item[$i]['category'];
 		$name = $item[$i]['name'];
 		$price = $item[$i]['price'];
+		$saleprice = $item[$i]['saleprice'];
 		$sizes = $item[$i]['sizes'];
 		$description = $item[$i]['description'];
 		$picture = $item[$i]['picture'];
@@ -109,9 +101,18 @@
 				'.$name.'
 			  </div>
 			  <div class="image-price">
-				$'.$price.' USD
-			  </div>
-			  <a href="view.php?category='.$category.'&id='.$id.'"><div class="image-button">
+		';
+				//check if the item as a sale price
+				if($saleprice > 0) {
+					echo '<del>$'.$price.' USD</del> $'.$saleprice.' USD';
+					echo '</div>';
+					echo '<span class="new badge green" data-badge-caption="Sale!"></span>';
+				} else {
+					echo '$'.$price.' USD';
+					echo '</div>';
+				}
+		echo '
+			  <a href="view.php?category='.$category.'&id='.$categoryid.'"><div class="image-button">
 				<div class="image-text">Choose Options</div>
 			  </div></a>
 			</div>
@@ -128,11 +129,6 @@
 			echo '<img src="rsrc/index/sarassaalphalogo.png" id="sarassalogo">';
 		}
 	?>
-	<ul class="pagination" align="center">
-		<li id="previousPage"><a id="previousPageHref" href="?page=<?php echo($pageIndex)?>"><i style="color: white;" class="material-icons">chevron_left</i></a></li>
-		<li style="color: white;" id="currentPage" value="<?php echo($pageIndex +1)?>"><?php echo($pageIndex +1)?></li>
-		<li id="nextPage" class="waves-effect"><a href="?page=<?php echo($pageIndex +2)?>"><i style="color: white;" class="material-icons">chevron_right</i></a></li>
-	</ul>
 	</div>
 </main>
 <footer class="page-footer" id="footer-page">
@@ -150,18 +146,18 @@
 			<div class="col s12 m6 l3 xl3">
 				<h5 id="footer-header-text"><span><i class="material-icons" style="margin-right: 5px">link</i></span>Quick Links</h5>
 				<ul>
-				<li><a id="footer-sub-text" href="anime.php">Privacy Policy</a></li>
+				<li><a id="footer-sub-text" href="privacy.php">Privacy Policy</a></li>
 				</ul>
 			</div>
 			<div class="col s12 m6 l3 xl3">
 				<h5 id="footer-header-text"><span><i class="material-icons" style="margin-right: 5px">assignment</i></span>Categories</h5>
 				<ul>
-				<li><a id="footer-sub-text" href="anime.php">New Arrivals</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Women's Clothing</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Men's Clothing</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Jewelry</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Sales</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Events</a></li>
+				<li><a id="footer-sub-text" href="new.php">New Arrivals</a></li>
+				<li><a id="footer-sub-text" href="women.php">Women's Clothing</a></li>
+				<li><a id="footer-sub-text" href="men.php">Men's Clothing</a></li>
+				<li><a id="footer-sub-text" href="jewelry.php">Jewelry</a></li>
+				<li><a id="footer-sub-text" href="sales.php">Sales</a></li>
+				<li><a id="footer-sub-text" href="events.php">Events</a></li>
 				</ul>
 			</div>
 			<div class="col s12 m6 l3 xl3">
@@ -196,14 +192,6 @@
 		stopPropagation: false // Stops event propagation
 		}
 	);
-	
-	//if we're on the first page or less, then add certain classes for the previous button
-	if(document.getElementById("currentPage").value <= 1) {
-		document.getElementById("previousPage").className += "disabled";
-		document.getElementById("previousPageHref").removeAttribute("href");
-	} else {
-		document.getElementById("previousPage").className += "waves-effect";
-	}
 
 	//get number of cart items within the browser
 	function updateNumberOfCartItems() {

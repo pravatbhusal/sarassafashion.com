@@ -2,8 +2,7 @@
 <body>
 	<header>
 		<title>Admin</title>   
-		<!--style.css, favcon, googlefont, materializecss-->
-		<link href="styles/indexstyle.css" type="text/css" rel="stylesheet">       
+		<!--style.css, favcon, googlefont, materializecss-->  
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">  	
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
@@ -24,15 +23,32 @@
 		<div id="upload-item-modal" class="modal">
 			<div class="modal-content">
 				<div class="row">
-					<form action="db/upload.php" method="POST" enctype="multipart/form-data">
+					<form action="db/uploaditem.php" method="POST" enctype="multipart/form-data">
 					<b><p style="text-align: center;" class="input-field col s12 m12 l12">Upload an Item</p></b>
-						<select class="browser-default input-field col s12 m12 l12" name="nicheType">
+						<select class="browser-default input-field col s12 m12 l12" name="category">
 						  <option value="women">Women's Clothing</option>
 						  <option value="men">Men's Clothing</option>
 						  <option value="jewelry">Jewelry</option>
 						</select>
 						<input required name="itemName" class="input-field col s12 m12 l12" type="text"  placeholder="Item Name" style="width: 600px;"></input>
-						<input required name="itemPrice" class="input-field col s12 m12 l12" placeholder="Price in USD" style="width: 200px;" min="1" onkeypress="return isNumberKey(event)"></input>
+						<input required name="itemPrice" class="input-field col s12 m12 l12" placeholder="Regular Price in USD" style="width: 600px;" min="1" onkeypress="return isNumberKey(event)"></input>
+						<input name="itemSalePrice" class="input-field col s12 m12 l12" placeholder="Item Sale Price in USD (Leave blank if there is no sale for this item)" style="width: 600px;" min="0" onkeypress="return isNumberKey(event)"></input>
+						<p class="col s12 m12 l12">
+							<input name="sizeList[]" value="Adult-XL" type="checkbox" class="filled-in" id="adult-xl"/>
+							<label for="adult-xl">Adult-XL</label>
+							<input name="sizeList[]" value="Adult-Large" type="checkbox" class="filled-in" id="adult-l"/>
+							<label for="adult-l">Adult-Large</label>
+							<input name="sizeList[]" value="Adult-Medium" type="checkbox" class="filled-in" id="adult-medium"/>
+							<label for="adult-medium">Adult-Medium</label>
+							<input name="sizeList[]" value="Adult-Small" type="checkbox" class="filled-in" id="adult-small"/>
+							<label for="adult-small">Adult-Small</label>
+							<input name="sizeList[]" value="Youth-Large" type="checkbox" class="filled-in" id="youth-large"/>
+							<label for="youth-large">Youth-Large</label>
+							<input name="sizeList[]" value="Youth-Medium" type="checkbox" class="filled-in" id="youth-medium"/>
+							<label for="youth-medium">Youth-Medium</label>
+							<input name="sizeList[]" value="Youth-Small" type="checkbox" class="filled-in" id="youth-small"/>
+							<label for="youth-small">Youth-Small</label>
+						</p>
 						<textarea required id="itemDescription" name="itemDescription" style="width: 600px;" placeholder="Item Description" class="materialize-textarea input-field col s12 m12 l12"></textarea>
 						<h6 class="input-field col s12 m12 l3">Picture File:</h6>
 						<input required type="file" id="itemPicture" name="itemPicture" accept="image/*" class="input-field col s12 m12 l6">
@@ -46,14 +62,58 @@
 		<div id="delete-item-modal" class="modal">
 			<div class="modal-content">
 				<div class="row">
-					<form action="db/delete.php" method="POST">
+					<form action="db/deleteitem.php" method="POST">
 					<b><p style="text-align: center;" class="input-field col s12 m12 l12">Delete an Item</p></b>
-						<select class="browser-default input-field col s12 m12 l12" name="nicheType">
+						<select class="browser-default input-field col s12 m12 l12" name="category">
 						  <option value="women">Women's Clothing</option>
 						  <option value="men">Men's Clothing</option>
 						  <option value="jewelry">Jewelry</option>
 						</select>
-						<input required name="itemName" class="input-field col s12 m12 l12" type="text"  placeholder="Item Name" style="width: 500px;"></input>
+						<input required name="itemId" class="input-field col s12 m12 l12" type="text"  placeholder="Item Id" style="width: 500px;"></input>
+						<button type="submit" class="btn input-field col s12 m12 l12">Delete</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		<!--upload event modal-->
+		<div id="upload-event-modal" class="modal">
+			<div class="modal-content">
+				<div class="row">
+					<form action="db/uploadevent.php" method="POST" enctype="multipart/form-data">
+					<b><p style="text-align: center;" class="input-field col s12 m12 l12">Add an Event</p></b>
+						<input required name="eventName" class="input-field col s12 m12 l12" type="text"  placeholder="Event Name" style="width: 750px;"></input>
+						<input required name="expires" type="text" placeholder="Event End Date" class="input-field col s12 m12 l12 datepicker">
+						<h6 class="input-field col s12 m12 l3">Picture File:</h6>
+						<input required type="file" name="eventPicture" accept="image/*" class="input-field col s12 m12 l6">
+						<button type="submit" class="btn input-field col s12 m12 l12">Upload</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		<!--add coupon modal-->
+		<div id="add-coupon-modal" class="modal">
+			<div class="modal-content">
+				<div class="row">
+					<form action="db/uploadcoupon.php" method="POST">
+					<b><p style="text-align: center;" class="input-field col s12 m12 l12">Add a Coupon</p></b>
+						<input required name="couponName" class="input-field col s12 m12 l12" type="text"  placeholder="Coupon Name" style="width: 750px;"></input>
+						<input required name="discount" class="input-field col s12 m12 l12" placeholder="Coupon % Discount (Do not add % sign)" style="width: 600px;" min="0" onkeypress="return isNumberKey(event)"></input>
+						<input required name="expires" type="text" placeholder="Coupon Expire Date" class="input-field col s12 m12 l12 datepicker">
+						<button type="submit" class="btn input-field col s12 m12 l12">Upload</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		<!--delete coupon modal-->
+		<div id="delete-coupon-modal" class="modal">
+			<div class="modal-content">
+				<div class="row">
+					<form action="db/deletecoupon.php" method="POST">
+					<b><p style="text-align: center;" class="input-field col s12 m12 l12">Delete a Coupon</p></b>
+						<input required name="couponName" class="input-field col s12 m12 l12" type="text"  placeholder="Coupon Name" style="width: 500px;"></input>
 						<button type="submit" class="btn input-field col s12 m12 l12">Delete</button>
 					</form>
 				</div>
@@ -72,11 +132,63 @@
 		if($password == $adminPassword) {
 			echo '<div id="adminDiv" style="text-align: center">
 			<b><h4 style="color: #e53935;">Admin Control Panel</h4></b>
+			
 			<br>
 			<button href="#upload-item-modal" class="modal-trigger btn" style="margin-bottom: 10px;">Upload an item</button>
 			<br>
 			<button href="#delete-item-modal" class="modal-trigger btn" style="margin-bottom: 10px; background-color: #e53935;">Delete an item</button>
 			<br>
+			
+			<hr width="500px">
+			<button href="#upload-event-modal" class="modal-trigger btn" style="margin-bottom: 10px;">Add an Event</button>
+			<br>
+			
+			<hr width="500px">
+			<button href="#add-coupon-modal" class="modal-trigger btn" style="margin-bottom: 10px;">Add a Coupon</button>
+			<br>
+			<button href="#delete-coupon-modal" class="modal-trigger btn" style="margin-bottom: 10px; background-color: #e53935;">Delete a coupon</button>
+			<br>
+			
+			<hr width="500px">
+			PayPal Email: <input id="email" type="text" style="width: 250px; margin-left: 5px;" value='.$adminEmail.'>
+			<br>
+			Admin Page Password: <input id="password" type="password" style="width: 250px; margin-left: 5px;" value='.$adminPassword.'>
+			<br>
+			Shipping Price Per Item (USD): <input id="shipping" type="text" style="width: 250px; margin-left: 5px;" min="1" onkeypress="return isNumberKey(event)" value='.$shippingFeeUSD.'>
+			<br>
+			<button onclick="updateSettings()" class="btn">Update Settings</button>
+			<br>
+			
+			<hr>
+			<div class="container">
+			<table>
+				<tr>
+					<th>Coupon Name</th>
+					<th>Expires</th> 
+					<th>Discount Percent</th>
+				</tr>
+			';
+				//add rows for the non-expired coupons
+				$query = "SELECT * FROM coupons WHERE expires > NOW()";
+				$result = mysqli_query($link, $query);
+				while($row = mysqli_fetch_array($result)) {
+					$name = $row['name'];
+					$expires = $row['expires'];
+					$discount = $row['discount_percent'];
+					echo '
+						<tr>
+						<td>'.$name.'</td>
+						<td>'.$expires.'</td> 
+						<td>'.$discount.'%</td>
+						</tr>
+					';
+					break;
+				}
+			echo '
+			</table>
+			</div>
+			
+			<hr>
 			<a href="index.php">Click here to go back to the home page.</a>
 			</div>
 			';
@@ -116,9 +228,18 @@
 </body>
 
 	<script>
-		//modal, text editor settings
+		//modal, text editor, datepicker settings
 		$('.modal').modal();
 		$('#itemDescription').trigger('autoresize');
+		$('.datepicker').pickadate({
+			selectMonths: true, // Creates a dropdown to control month
+			selectYears: 15, // Creates a dropdown of 15 years to control year,
+			today: 'Today',
+			clear: 'Clear',
+			close: 'Ok',
+			format: 'yyyy-mm-dd',
+			closeOnSelect: false // Close upon selecting a date,
+		});
 		
 		function isNumberKey(evt)
 		{
@@ -128,6 +249,31 @@
 			 return false;
 
 			return true;
+		}
+		
+		//update the admin settings (using ajax to contact the updatesettings.php)
+		function updateSettings() {
+			var email = document.getElementById("email").value;
+			var password = document.getElementById("password").value;
+			var shipping = document.getElementById("shipping").value;
+			
+			var http = new XMLHttpRequest();
+			var location = window.location.href;
+			var directoryPath = location.substring(0, location.lastIndexOf("/")+1);
+			var url = directoryPath + "db/updatesettings.php";
+			//variables to send via POST to the php file
+			var params = "email=" + email + "&password=" + password + "&shipping=" + shipping;
+			http.open("POST", url, true);
+
+			//Send the proper header information along with the request
+			http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+			http.onreadystatechange = function () { //Call a function when the state changes.
+				if (http.readyState == 4 && http.status == 200) {
+					alert(http.responseText); //alert the result
+				}
+			}
+			http.send(params);
 		}
 	</script>
 </html>

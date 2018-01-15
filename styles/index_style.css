@@ -147,6 +147,11 @@ main {
 	font-family: Century Gothic, sans-serif;
 	font-size: 24px;
 }
+#toast-container {
+	top: auto !important;
+	right: auto !important;
+	bottom: 0%;
+}
 
 /* New Items */
 .image-container {

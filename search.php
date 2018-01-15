@@ -86,9 +86,9 @@
 		$queryWomen = "SELECT * FROM women WHERE name LIKE '%" . $search . "%'";
 		
 		$results = array();
+		$results[] = mysqli_query($link, $queryWomen);
 		$results[] = mysqli_query($link, $queryJewelry);
 		$results[] = mysqli_query($link, $queryMen);
-		$results[] = mysqli_query($link, $queryWomen);
 		
 		for($i = 0; $i < 3; $i ++) {
 			while($row = mysqli_fetch_array($results[$i])) {	
@@ -119,7 +119,6 @@
 			}
 		}
 		?>	
-		</ul>
 	</div>
 	<?php 
 		if($foundResult == false) {
@@ -146,18 +145,18 @@
 			<div class="col s12 m6 l3 xl3">
 				<h5 id="footer-header-text"><span><i class="material-icons" style="margin-right: 5px">link</i></span>Quick Links</h5>
 				<ul>
-				<li><a id="footer-sub-text" href="anime.php">Privacy Policy</a></li>
+				<li><a id="footer-sub-text" href="privacy.php">Privacy Policy</a></li>
 				</ul>
 			</div>
 			<div class="col s12 m6 l3 xl3">
 				<h5 id="footer-header-text"><span><i class="material-icons" style="margin-right: 5px">assignment</i></span>Categories</h5>
 				<ul>
-				<li><a id="footer-sub-text" href="anime.php">New Arrivals</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Women's Clothing</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Men's Clothing</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Jewelry</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Sales</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Events</a></li>
+				<li><a id="footer-sub-text" href="new.php">New Arrivals</a></li>
+				<li><a id="footer-sub-text" href="women.php">Women's Clothing</a></li>
+				<li><a id="footer-sub-text" href="men.php">Men's Clothing</a></li>
+				<li><a id="footer-sub-text" href="jewelry.php">Jewelry</a></li>
+				<li><a id="footer-sub-text" href="sales.php">Sales</a></li>
+				<li><a id="footer-sub-text" href="events.php">Events</a></li>
 				</ul>
 			</div>
 			<div class="col s12 m6 l3 xl3">

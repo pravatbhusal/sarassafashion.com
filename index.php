@@ -1,7 +1,7 @@
 <html>
 <body>
 <header>
-	<title>Index | Buy Cultural Fashion Online USA</title>
+	<title>Home | Buy Cultural Fashion Online USA</title>
 	<!--style.css, favcon, googlefont, materializecss-->
 	<link href="styles/index_style.css" type="text/css" rel="stylesheet">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -76,11 +76,18 @@
     <div class="carousel carousel-slider center" data-indicators="true">
 	<?php
 		require_once("db/dbconnection.php");
+		//gather the 4 latest events
+		$event = array();
+		$query = "SELECT * FROM events ORDER by id DESC LIMIT 4";
+		$result = mysqli_query($link, $query);
+		while($row = mysqli_fetch_array($result)) {
+			$event[] = $row;
+		}
+		for($i = 0; $i < count($event); $i++) { 
+			$eventPicture = $event[$i]['picture'];
+			echo '<a class="carousel-item"><img src="'.$eventPicture.'"></a>';
+		}
 	?>
-		<a class="carousel-item" href="#one!"><img src="rsrc/index/caro1.jpg"></a>
-		<a class="carousel-item" href="#two!"><img src="rsrc/index/caro2.jpg"></a>
-		<a class="carousel-item" href="#three!"><img src="rsrc/index/caro3.jpg"></a>
-		<a class="carousel-item" href="#four!"><img src="rsrc/index/caro4.jpg"></a>
 	</div>
   
     <!-- Shipping Prices -->
@@ -133,10 +140,11 @@
 		$new[] = $row;
 	}
 	for($i = 0; $i < count($new); $i++) {
-		$id = $new[$i]['id'];
+		$categoryid = $new[$i]['categoryid'];
 		$category = $new[$i]['category'];
 		$name = $new[$i]['name'];
 		$price = $new[$i]['price'];
+		$saleprice = $new[$i]['saleprice'];
 		$sizes = $new[$i]['sizes'];
 		$description = $new[$i]['description'];
 		$picture = $new[$i]['picture'];
@@ -148,9 +156,18 @@
 				'.$name.'
 			  </div>
 			  <div class="image-price">
-				$'.$price.' USD
-			  </div>
-			  <a href="view.php?category=new&id='.$id.'"><div class="image-button">
+		';
+				//check if the item as a sale price
+				if($saleprice > 0) {
+					echo '<del>$'.$price.' USD</del> $'.$saleprice.' USD';
+					echo '</div>';
+					echo '<span class="new badge green" data-badge-caption="Sale!"></span>';
+				} else {
+					echo '$'.$price.' USD';
+					echo '</div>';
+				}
+		echo '
+			  <a href="view.php?category='.$category.'&id='.$categoryid.'"><div class="image-button">
 				<div class="image-text">Choose Options</div>
 			  </div></a>
 			</div>
@@ -180,18 +197,18 @@
 			<div class="col s12 m6 l3 xl3">
 				<h5 id="footer-header-text"><span><i class="material-icons" style="margin-right: 5px">link</i></span>Quick Links</h5>
 				<ul>
-				<li><a id="footer-sub-text" href="anime.php">Privacy Policy</a></li>
+				<li><a id="footer-sub-text" href="privacy.php">Privacy Policy</a></li>
 				</ul>
 			</div>
 			<div class="col s12 m6 l3 xl3">
 				<h5 id="footer-header-text"><span><i class="material-icons" style="margin-right: 5px">assignment</i></span>Categories</h5>
 				<ul>
-				<li><a id="footer-sub-text" href="anime.php">New Arrivals</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Women's Clothing</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Men's Clothing</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Jewelry</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Sales</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Events</a></li>
+				<li><a id="footer-sub-text" href="new.php">New Arrivals</a></li>
+				<li><a id="footer-sub-text" href="women.php">Women's Clothing</a></li>
+				<li><a id="footer-sub-text" href="men.php">Men's Clothing</a></li>
+				<li><a id="footer-sub-text" href="jewelry.php">Jewelry</a></li>
+				<li><a id="footer-sub-text" href="sales.php">Sales</a></li>
+				<li><a id="footer-sub-text" href="events.php">Events</a></li>
 				</ul>
 			</div>
 			<div class="col s12 m6 l3 xl3">
@@ -238,6 +255,8 @@
 	}
 
 	updateNumberOfCartItems();
+	
+	Materialize.toast("We use cookies in order to provide you the best service, please read our privacy policy for more information.", 10000);
 </script>
 </body>
 </html>

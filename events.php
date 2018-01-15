@@ -75,10 +75,20 @@
 	<p class="center-align" id="new-title-text">- Events -</p>
   	<!-- Photo Carousel -->
     <div style="margin-bottom: 25px;" class="carousel carousel-slider center" data-indicators="true">
-		<a class="carousel-item" href="#one!"><img src="rsrc/index/caro1.jpg"></a>
-		<a class="carousel-item" href="#two!"><img src="rsrc/index/caro2.jpg"></a>
-		<a class="carousel-item" href="#three!"><img src="rsrc/index/caro3.jpg"></a>
-		<a class="carousel-item" href="#four!"><img src="rsrc/index/caro4.jpg"></a>
+	<?php
+		require_once("db/dbconnection.php");
+		//gather non-expired events
+		$event = array();
+		$query = "SELECT * FROM events WHERE expires > NOW() ORDER by id DESC";
+		$result = mysqli_query($link, $query);
+		while($row = mysqli_fetch_array($result)) {
+			$event[] = $row;
+		}
+		for($i = 0; $i < count($event); $i++) {
+			$eventPicture = $event[$i]['picture'];
+			echo '<a class="carousel-item"><img src="'.$eventPicture.'"></a>';
+		}
+	?>
 	</div>
 	
 	<!--SarassA Logo-->
@@ -99,18 +109,18 @@
 			<div class="col s12 m6 l3 xl3">
 				<h5 id="footer-header-text"><span><i class="material-icons" style="margin-right: 5px">link</i></span>Quick Links</h5>
 				<ul>
-				<li><a id="footer-sub-text" href="anime.php">Privacy Policy</a></li>
+				<li><a id="footer-sub-text" href="privacy.php">Privacy Policy</a></li>
 				</ul>
 			</div>
 			<div class="col s12 m6 l3 xl3">
 				<h5 id="footer-header-text"><span><i class="material-icons" style="margin-right: 5px">assignment</i></span>Categories</h5>
 				<ul>
-				<li><a id="footer-sub-text" href="anime.php">New Arrivals</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Women's Clothing</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Men's Clothing</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Jewelry</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Sales</a></li>
-				<li><a id="footer-sub-text" href="anime.php">Events</a></li>
+				<li><a id="footer-sub-text" href="new.php">New Arrivals</a></li>
+				<li><a id="footer-sub-text" href="women.php">Women's Clothing</a></li>
+				<li><a id="footer-sub-text" href="men.php">Men's Clothing</a></li>
+				<li><a id="footer-sub-text" href="jewelry.php">Jewelry</a></li>
+				<li><a id="footer-sub-text" href="sales.php">Sales</a></li>
+				<li><a id="footer-sub-text" href="events.php">Events</a></li>
 				</ul>
 			</div>
 			<div class="col s12 m6 l3 xl3">

@@ -87,7 +87,7 @@
 				$i = 0;
 				$totalPrice = 0;
 				foreach ($_COOKIE as $item=>$quantity) {
-					//check if the cookie is one of the niche items
+					//check if the cookie is one of the items
 					if(strpos($item, 'item_') !== false) {
 						$itemArray = explode("_", $item); //0 = "item", 1 = id, 2 = item category, 3 = size
 						$query = "SELECT * FROM " . $itemArray[2] . " WHERE id = " . $itemArray[1];
@@ -97,6 +97,10 @@
 						$itemId = $itemArray[1];
 						$itemName = $row['name'];
 						$Price = $row['price'];
+						//if there's a saleprice, then set that as the price
+						if($row['saleprice'] > 0) {
+							$Price = $row['saleprice'];
+						}
 						$itemIcon = $row['picture'];
 						$size = $itemArray[3];
 							echo '
@@ -138,9 +142,34 @@
 				<input type="hidden" name="cmd" value="_cart">
 				<input type="hidden" name="upload" value="1">
 				<input type="hidden" name="business" value="'.$adminEmail.'">
-				<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$totalPrice.'">$'.$totalPrice.' USD</h4>
+			';
+				//check if the customer used a discount code, and check if it's an existing coupon code
+				if(isset($_POST["couponName"])) {
+					$coupon = $_POST["couponName"];
+					$query = "SELECT * FROM coupons WHERE name='$coupon' AND expires > NOW()";
+					$result = mysqli_query($link, $query);
+					$row = mysqli_fetch_array($result);
+					
+					//if the customer used a real coupon value, if not then don't give them a discount
+					if(isset($row)) {
+						//add the discount, and update the total price
+						$discount = $row["discount_percent"];
+						$discountPrice = $totalPrice * ((100 - $discount)/100);
+						echo '<input type="hidden" name="discount_rate_cart" value="'.$discount.'">';
+						echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$discountPrice.'"><del>$'.$totalPrice.' USD</del> $'.$discountPrice.' USD</h4>';
+					} else {
+						echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$totalPrice.'">$'.$totalPrice.' USD</h4>';
+					}
+				} else {
+					echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$totalPrice.'">$'.$totalPrice.' USD</h4>';
+				}
+			echo '
 				<br>
 				<label style="color: white">Shipping fees may apply</label>
+				</form>
+				<form method="POST" action="?">
+				<input name="couponName" class="browser-default" type="text" placeholder="Coupon Code...">
+				<button id="couponBTN" type="submit" style="margin-bottom: 10px;">Apply Coupon</button>
 				</form>
 				';
 			}
@@ -228,34 +257,10 @@
 	function removeCart(itemNumber) {
 		var item = document.getElementById("item_" + itemNumber);
 		var itemName = item.getAttribute("data-itemName");
-		var itemQuantity = item.getAttribute("data-itemQuantity");
-		var itemPrice = item.getAttribute("data-itemPrice");
 		delete_cookie(itemName);
-		item.parentNode.removeChild(item); //remove the item
-		items.splice(itemNumber, 1); //removes the item from the items array for PayPal checkout
-
-		//update the total price
-		var totalPriceText = document.getElementById("totalPrice");
-		var totalPrice = totalPriceText.getAttribute("data-totalPrice");
-		totalPrice -= itemPrice * itemQuantity;
-		document.getElementById("totalPrice").innerHTML = "$" + totalPrice + " USD";
-		document.getElementById("totalPrice").setAttribute("data-totalPrice", totalPrice);
-
-		//get number of cart items within the browser
-		var numberOfCartItems = 0;
-		numberOfCartItems += (document.cookie.split('item_').length - 1);
-
-		//if number of cart items are empty, then notify the user
-		if(numberOfCartItems == 0) {
-			var container = document.getElementById("itemContainer");
-			var emptyParagraph = document.createElement("p");
-			emptyParagraph.setAttribute("style", "color: white;");
-			var node = document.createTextNode("No items in the checkout...");
-			emptyParagraph.appendChild(node);
-			container.appendChild(emptyParagraph);
-			//remove the form
-			document.getElementById("paypalForm").parentNode.removeChild(document.getElementById("paypalForm"));
-		}
+		
+		//reload page to update the cart's total prices
+		location.reload();
 	}
 </script>
 </body>

@@ -112,6 +112,12 @@ main {
 	font-family: Century Gothic, sans-serif;
 	font-size: 24px;
 }
+#couponBTN:active {
+	background-color: white;
+}
+#couponBTN:focus {
+	background-color: white;
+}
 
 /* Items */
 .image-container {
