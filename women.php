@@ -172,9 +172,6 @@
 	<?php 
 		if(count($item) <= 0) {
 			echo '<h5 style="color: white">No results found...</h5>';
-		} else {
-			//SarassA Logo
-			echo '<img src="rsrc/index/sarassaalphalogo.png" id="sarassalogo">';
 		}
 	?>
 	<ul class="pagination" align="center">

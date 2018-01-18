@@ -73,17 +73,13 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
+	background-image: url('../rsrc/sarassalogo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+	background-size: 675px 400px;
 }
 main {
 	flex: 1 0 auto;
-}
-#sarassalogo {
-	height: 25em;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, 25%);
-	z-index: -999999;
 }
 #link-btn {
 	background-color: black;

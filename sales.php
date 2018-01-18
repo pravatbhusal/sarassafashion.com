@@ -163,9 +163,6 @@
 	<?php 
 		if($foundResult == false) {
 			echo '<h5 style="color: white">No sales available...</h5>';
-		} else {
-			//SarassA Logo
-			echo '<img src="rsrc/index/sarassaalphalogo.png" id="sarassalogo">';
 		}
 	?>
 	</div>

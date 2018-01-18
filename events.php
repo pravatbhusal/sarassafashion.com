@@ -135,9 +135,6 @@
 	
 	<p id="eventName" style="text-align: center; color: white;"></p>
 	<p id="eventExpires" style="text-align: center; color: white;"></p>
-	
-	<!--SarassA Logo-->
-	<img src="rsrc/index/sarassaalphalogo.png" id="sarassalogo">
 </main>
 <footer class="page-footer" id="footer-page">
 	<div class="container">

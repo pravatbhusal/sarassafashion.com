@@ -258,9 +258,6 @@
 		mysqli_query($link, $query);
 	?>
 	</div>
-	
-	<!--SarassA Logo-->
-	<img src="rsrc/index/sarassaalphalogo.png" id="sarassalogo">
 </main>
 <footer class="page-footer" id="footer-page">
 	<div class="container">

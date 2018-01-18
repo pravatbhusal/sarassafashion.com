@@ -232,9 +232,6 @@
 	<a href="mailto:info@sarassafashion.com">info@sarassafashion.com</a>.</p>
 	</p>
 	</div>
-	
-	<!--SarassA Logo-->
-	<img src="rsrc/index/sarassaalphalogo.png" id="sarassalogo">
 </main>
 <footer class="page-footer" id="footer-page">
 	<div class="container">
