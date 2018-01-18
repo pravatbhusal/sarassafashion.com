@@ -28,6 +28,7 @@
 		<a target="_blank" href="https://www.instagram.com/sarassa_official/" style="margin-right: 5px"><img width="18" height="18" src="rsrc/index/instagram.png"></a>
 		<a target="_blank" href="https://twitter.com/SarassAbiz" style="margin-right: 110px;"><img width="18" height="18" src="rsrc/index/twitter.png"></a>
 	</div>
+	<div id="navbarTop">-</div>
 	<div id="navbarMiddle">
 		<h4 id="titleText"><a id="titleText" href="index.php">SarassA Fashion</a></h4>
 	</div>
@@ -60,13 +61,46 @@
 		<li class="divider"></li>
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=gararah">Gararahs</a></li>
 	</ul>
+	<ul id="menDropDown" class="dropdown-content">
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=kurta">Kurtas</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=suit">2 Pc Suits</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=pajama">Pajamas</a></li>
+	</ul>
+	<ul id="jewelryDropDown" class="dropdown-content">
+		<li style="background-color: white;"><a style="color: black;"><b>Pakistani</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;"><b>Indian</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;"><b>Turkish</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;"><b>Bridal</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;"><b>CZ</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+	</ul>
 	
 	<!-- Item Buttons -->
 	<div class="row" style="margin-top: 10px;" align="center">
 		<a href="new.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">New Arrivals</a>
 		<a class='dropdown-button btn' data-activates="womenDropDown" href="women.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Women's Clothing</a>
-		<a href="men.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Men's Clothing</a>
-		<a href="jewelry.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Jewelry</a>
+		<a class='dropdown-button btn' data-activates="menDropDown" href="men.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Men's Clothing</a>
+		<a class='dropdown-button btn' data-activates="jewelryDropDown" href="jewelry.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Jewelry</a>
 		<a href="sales.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Sales</a>
 		<a href="events.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Events</a>
 	</div>

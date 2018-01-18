@@ -14,4 +14,5 @@ $row = mysqli_fetch_array($result);
 $adminEmail = $row["email"];
 $adminPassword = $row["password"];
 $shippingFeeUSD = $row["shipping"];
+$taxUSD = $row["tax"];
 ?>

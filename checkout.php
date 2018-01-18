@@ -67,13 +67,46 @@
 		<li class="divider"></li>
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=gararah">Gararahs</a></li>
 	</ul>
+	<ul id="menDropDown" class="dropdown-content">
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=kurta">Kurtas</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=suit">2 Pc Suits</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=pajama">Pajamas</a></li>
+	</ul>
+	<ul id="jewelryDropDown" class="dropdown-content">
+		<li style="background-color: white;"><a style="color: black;"><b>Pakistani</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;"><b>Indian</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;"><b>Turkish</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;"><b>Bridal</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;"><b>CZ</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+	</ul>
 	
 	<!-- Item Buttons -->
 	<div class="row" style="margin-top: 10px;" align="center">
 		<a href="new.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">New Arrivals</a>
 		<a class='dropdown-button btn' data-activates="womenDropDown" href="women.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Women's Clothing</a>
-		<a href="men.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Men's Clothing</a>
-		<a href="jewelry.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Jewelry</a>
+		<a class='dropdown-button btn' data-activates="menDropDown" href="men.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Men's Clothing</a>
+		<a class='dropdown-button btn' data-activates="jewelryDropDown" href="jewelry.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Jewelry</a>
 		<a href="sales.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Sales</a>
 		<a href="events.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Events</a>
 	</div>
@@ -103,6 +136,8 @@
 						}
 						$itemIcon = $row['picture'];
 						$size = $itemArray[3];
+						//add tax for the price
+						$Price = $Price * (1 + $taxUSD);
 							echo '
 							<li id="item_'.$i.'" data-itemName='.$item.' data-itemQuantity='.$quantity.' data-itemPrice='.$Price.' class="collection-item avatar" style="margin-top: 10px; background-color: rgba(0, 0, 0, 0);">
 							<div class="row">

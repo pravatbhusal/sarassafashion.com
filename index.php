@@ -28,6 +28,7 @@
 		<a target="_blank" href="https://www.instagram.com/sarassa_official/" style="margin-right: 5px"><img width="18" height="18" src="rsrc/index/instagram.png"></a>
 		<a target="_blank" href="https://twitter.com/SarassAbiz" style="margin-right: 110px;"><img width="18" height="18" src="rsrc/index/twitter.png"></a>
 	</div>
+	<div id="navbarTop">-</div>
 	<div id="navbarMiddle">
 		<h4 id="titleText"><a id="titleText" href="index.php">SarassA Fashion</a></h4>
 	</div>
@@ -60,13 +61,46 @@
 		<li class="divider"></li>
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=gararah">Gararahs</a></li>
 	</ul>
+	<ul id="menDropDown" class="dropdown-content">
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=kurta">Kurtas</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=suit">2 Pc Suits</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=pajama">Pajamas</a></li>
+	</ul>
+	<ul id="jewelryDropDown" class="dropdown-content">
+		<li style="background-color: white;"><a style="color: black;"><b>Pakistani</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;"><b>Indian</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;"><b>Turkish</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;"><b>Bridal</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li class="divider"></li>
+		<li style="background-color: white;"><a style="color: black;"><b>CZ</b></a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+	</ul>
 	
 	<!-- Item Buttons -->
 	<div class="row" style="margin-top: 10px;" align="center">
 		<a href="new.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">New Arrivals</a>
 		<a class='dropdown-button btn' data-activates="womenDropDown" href="women.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Women's Clothing</a>
-		<a href="men.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Men's Clothing</a>
-		<a href="jewelry.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Jewelry</a>
+		<a class='dropdown-button btn' data-activates="menDropDown" href="men.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Men's Clothing</a>
+		<a class='dropdown-button btn' data-activates="jewelryDropDown" href="jewelry.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Jewelry</a>
 		<a href="sales.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Sales</a>
 		<a href="events.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Events</a>
 	</div>
@@ -78,14 +112,14 @@
 		require_once("db/dbconnection.php");
 		//gather the 4 latest events
 		$event = array();
-		$query = "SELECT * FROM events ORDER by id DESC LIMIT 4";
+		$query = "SELECT * FROM home ORDER by id DESC LIMIT 4";
 		$result = mysqli_query($link, $query);
 		while($row = mysqli_fetch_array($result)) {
 			$event[] = $row;
 		}
 		for($i = 0; $i < count($event); $i++) { 
-			$eventPicture = $event[$i]['picture'];
-			echo '<a class="carousel-item"><img src="'.$eventPicture.'"></a>';
+			$indexPicture = $event[$i]['picture'];
+			echo '<a class="carousel-item"><img src="'.$indexPicture.'"></a>';
 		}
 	?>
 	</div>
@@ -174,10 +208,51 @@
 		</div>
 		';
 	}
+	//reset the column styling
+	echo '
+	<div class="col s12 m12 l12 xl12">
+	<p align="center"><a href="new.php" class="waves-effect waves-light btn" style="background-color: black">Show More</a></p>
+	</div>
+	';
+	?>
+	
+	<!-- Social Media (Use the same styles as the item buttons) !-->
+	<div class="row" align="center">
+	  <div class="col s12 m12 l6 xl6">
+	   <a target="_blank" href="https://www.instagram.com/sarassa_official/"><div id="instagram-photo" class="hoverable">
+			<p style="margn: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">Instagram</p>
+		</div></a>
+	  </div>
+	  <div class="col s12 m12 l6 xl6">
+	   <a target="_blank" href="https://www.facebook.com/sarassafashion"><div id="facebook-photo" class="hoverable">
+			<p style="margn: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">Like us on Facebook</p>
+		</div></a>
+	  </div>
+	</div>
+			
+	<hr>
+	
+	<!-- Email Newsletter -->
+	<p class="center-align" id="about-title-text">- Sign up for our Newsletters -</p>
+	<p class="center-align"><i class="material-icons" style="color: white; font-size: 4rem;">graphic_eq</i></p>
+	<div class="input-field">
+		<input class="browser-default" name="search" placeholder="Email Here..." type="text" required id="newsletter-text">
+		<a onclick="addNewsLetter()" class="waves-effect waves-light btn" style="background-color: black">Join Newsletter</a>	
+	</div>
+	
+	<!-- Hit counter -->
+	<?php
+		$query = "SELECT * FROM visitors WHERE id=1";
+		$result = mysqli_query($link, $query);
+		$row = mysqli_fetch_array($result);
+		$hits = $row["counts"] + 1;
+		echo '<p style="color: white;">Number of Hits: '.$hits.'</p>';
+		
+		//add the number of hits onto the database
+		$query = "UPDATE visitors SET counts='$hits' WHERE id=1";
+		mysqli_query($link, $query);
 	?>
 	</div>
-	<p align="center"><a href="new.php" class="waves-effect waves-light btn" style="background-color: black">Show More</a></p>
-  </div>
 	
 	<!--SarassA Logo-->
 	<img src="rsrc/index/sarassaalphalogo.png" id="sarassalogo">
@@ -252,6 +327,35 @@
 		numberOfCartItems += (document.cookie.split('item_').length - 1);
 		//set the number of items in the cart
 		document.getElementById('cart-number').innerHTML = numberOfCartItems;
+	}
+	
+	//add a new email into the newsletter (send via Ajax to PHP and MySQL)
+	function addNewsLetter() {
+		var email = document.getElementById("newsletter-text").value;
+		
+		//check if this is a valid email
+		if(email.indexOf("@") <= 0) {
+			alert("Please enter a valid email address!");
+		} else {
+			var http = new XMLHttpRequest();
+			var location = window.location.href;
+			var directoryPath = location.substring(0, location.lastIndexOf("/")+1);
+			var url = directoryPath + "db/uploadnewsemail.php";
+			//variables to send via POST to the php file
+			var params = "email=" + email;
+			http.open("POST", url, true);
+
+			//Send the proper header information along with the request
+			http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+			http.onreadystatechange = function () { //Call a function when the state changes.
+				if (http.readyState == 4 && http.status == 200) {
+				alert(http.responseText); //alert the result
+				document.getElementByIdemail = "";
+				}
+			}
+			http.send(params);
+		}
 	}
 
 	updateNumberOfCartItems();

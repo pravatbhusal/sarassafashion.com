@@ -4,6 +4,11 @@ $website = "http://$_SERVER[HTTP_HOST]";
 $eventName = $_POST["eventName"];
 $expires = $_POST["expires"];
 
+//create file directory in case it doesn't exist
+if (!is_dir('icons/events')) {
+    mkdir('icons/events', 0777, true);
+}
+
 $unique_hash = md5(uniqid(rand(), true)); //generate a unique hash
 $icon = "db/icons/events/" . $unique_hash;
 $icon .= preg_replace("/[^A-Za-z0-9 \.\-_]/", '', $_FILES['eventPicture']['name']);

@@ -133,6 +133,27 @@
 			</div>
 		</div>
 		
+		<!--edit homepage pictures modal-->
+		<div id="edit-homepictures-modal" class="modal">
+			<div class="modal-content">
+				<div class="row">
+					<form action="db/updatehome.php" method="POST" enctype="multipart/form-data">
+					<b><p style="text-align: center;" class="input-field col s12 m12 l12">Edit Homepage Pictures</p></b>
+						<h6 style="text-align: center" class="input-field col s12 m12 l12">Each file must be uploaded in order to update the home page's carousel.</h6>
+						<h6 class="input-field col s12 m12 l12">Picture 1 File:</h6>
+						<input type="file" name="picture1" accept="image/*" class="input-field col s12 m12 l6">
+						<h6 class="input-field col s12 m12 l12">Picture 2 File:</h6>
+						<input type="file" name="picture2" accept="image/*" class="input-field col s12 m12 l6">
+						<h6 class="input-field col s12 m12 l12">Picture 3 File:</h6>
+						<input type="file" name="picture3" accept="image/*" class="input-field col s12 m12 l6">
+						<h6 class="input-field col s12 m12 l12">Picture 4 File:</h6>
+						<input type="file" name="picture4" accept="image/*" class="input-field col s12 m12 l6">
+						<button type="submit" class="btn input-field col s12 m12 l12">Upload</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		
 		<?php
 		include_once("db/dbconnection.php");
 		
@@ -165,14 +186,26 @@
 			<br>
 			
 			<hr width="500px">
+			<button href="#edit-homepictures-modal" class="modal-trigger btn" style="margin-bottom: 10px;">Edit Home Page Pictures</button>
+			<br>
+			
+			<hr width="500px">
 			PayPal Email: <input id="email" type="text" style="width: 250px; margin-left: 5px;" value='.$adminEmail.'>
 			<br>
 			Admin Page Password: <input id="password" type="password" style="width: 250px; margin-left: 5px;" value='.$adminPassword.'>
 			<br>
 			Shipping Price Per Item (USD): <input id="shipping" type="text" style="width: 250px; margin-left: 5px;" min="1" onkeypress="return isNumberKey(event)" value='.$shippingFeeUSD.'>
 			<br>
+			Tax Amount Per Dollar (USD): <input id="tax" type="text" style="width: 250px; margin-left: 5px;" min="1" onkeypress="return isNumberKey(event)" value='.$taxUSD.'>
+			<br>
 			<button onclick="updateSettings()" class="btn">Update Settings</button>
 			<br>
+			<br>
+			
+			<hr width="800px">
+			<h6>Emails List (Copy and Paste):</h6>
+			<textarea placeholder="Emails..." style="width: 750px" id="email-list" class="browser-default"></textarea>
+			<p><button onclick="getEmails()" class="btn">Get Emails</button></p>
 			
 			<hr>
 			<div class="container">
@@ -271,13 +304,14 @@
 			var email = document.getElementById("email").value;
 			var password = document.getElementById("password").value;
 			var shipping = document.getElementById("shipping").value;
+			var tax = document.getElementById("tax").value;
 			
 			var http = new XMLHttpRequest();
 			var location = window.location.href;
 			var directoryPath = location.substring(0, location.lastIndexOf("/")+1);
 			var url = directoryPath + "db/updatesettings.php";
 			//variables to send via POST to the php file
-			var params = "email=" + email + "&password=" + password + "&shipping=" + shipping;
+			var params = "email=" + email + "&password=" + password + "&shipping=" + shipping + "&tax=" + tax;
 			http.open("POST", url, true);
 
 			//Send the proper header information along with the request
@@ -286,6 +320,32 @@
 			http.onreadystatechange = function () { //Call a function when the state changes.
 				if (http.readyState == 4 && http.status == 200) {
 					alert(http.responseText); //alert the result
+				}
+			}
+			http.send(params);
+		}
+		
+		//get the emails
+		function getEmails() {
+			var email = document.getElementById("email-list");
+			
+			var http = new XMLHttpRequest();
+			var location = window.location.href;
+			var directoryPath = location.substring(0, location.lastIndexOf("/")+1);
+			var url = directoryPath + "db/getemails.php";
+			//variables to send via POST to the php file
+			var params = "";
+			http.open("POST", url, true);
+
+			//Send the proper header information along with the request
+			http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+			http.onreadystatechange = function () { //Call a function when the state changes.
+				if (http.readyState == 4 && http.status == 200) {
+					//set the email-list html to the response, and make sure to remove the trailing comma
+					var emails = http.responseText;
+					emails = emails.slice(0, -1); // "12345.0"
+					email.innerHTML = emails;
 				}
 			}
 			http.send(params);

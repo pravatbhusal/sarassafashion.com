@@ -4,6 +4,18 @@ $website = "http://$_SERVER[HTTP_HOST]";
 $category = $_POST["category"];
 $itemName = $_POST["itemName"];
 $itemPrice = $_POST["itemPrice"];
+
+//create file directories in case it doesn't exist
+if (!is_dir('icons/jewelry')) {
+    mkdir('icons/jewelry', 0777, true);
+}
+if (!is_dir('icons/men')) {
+    mkdir('icons/men', 0777, true);
+}
+if (!is_dir('icons/women')) {
+    mkdir('icons/women', 0777, true);
+}
+
 //check if there was a sale price
 if(isset($_POST["itemSalePrice"])) {
 	$itemSalePrice = $_POST["itemSalePrice"];
