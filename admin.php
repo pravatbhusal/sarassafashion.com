@@ -139,7 +139,7 @@
 				<div class="row">
 					<form action="db/updatehome.php" method="POST" enctype="multipart/form-data">
 					<b><p style="text-align: center;" class="input-field col s12 m12 l12">Edit Homepage Pictures</p></b>
-						<h6 style="text-align: center" class="input-field col s12 m12 l12">Each file must be uploaded in order to update the home page's carousel.</h6>
+						<h6 style="text-align: center" class="input-field col s12 m12 l12">Individual files may be uploaded to update the home page's carousel.</h6>
 						<h6 class="input-field col s12 m12 l12">Picture 1 File:</h6>
 						<input type="file" name="picture1" accept="image/*" class="input-field col s12 m12 l6">
 						<h6 class="input-field col s12 m12 l12">Picture 2 File:</h6>
