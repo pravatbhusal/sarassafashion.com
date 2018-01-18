@@ -70,29 +70,34 @@
 	</ul>
 	<ul id="jewelryDropDown" class="dropdown-content">
 		<li style="background-color: white;"><a style="color: black;"><b>Pakistani</b></a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=pakistani%20earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=pakistani%20ring">Rings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=pakistani%20braclet">Bracelets/Bangels</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=pakistani%20necklace">Necklaces</a></li>
 		<li class="divider"></li>
 		<li style="background-color: white;"><a style="color: black;"><b>Indian</b></a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=indian%20earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=indian%20ring">Rings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=indian%20braclet">Bracelets/Bangels</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=indian%20necklace">Necklaces</a></li>
 		<li class="divider"></li>
 		<li style="background-color: white;"><a style="color: black;"><b>Turkish</b></a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=turkish%20earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=turkish%20ring">Rings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=turkish%20braclet">Bracelets/Bangels</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=turkish%20necklace">Necklaces</a></li>
 		<li class="divider"></li>
 		<li style="background-color: white;"><a style="color: black;"><b>Bridal</b></a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=bridal%20earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=bridal%20ring">Rings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=bridal%20braclet">Bracelets/Bangels</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=bridal%20necklace">Necklaces</a></li>
 		<li class="divider"></li>
 		<li style="background-color: white;"><a style="color: black;"><b>CZ</b></a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=earring">Earrings</a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=braclet">Bracelets</a></li>
-		<li style="background-color: white;"><a style="color: black;" href="search.php?search=necklace">Necklaces</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20earring">Earrings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20ring">Rings</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20braclet">Bracelets/Bangels</a></li>
+		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20necklace">Necklaces</a></li>
 	</ul>
 	
 	<!-- Item Buttons -->
@@ -100,7 +105,7 @@
 		<a href="new.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">New Arrivals</a>
 		<a class='dropdown-button btn' data-activates="womenDropDown" href="women.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Women's Clothing</a>
 		<a class='dropdown-button btn' data-activates="menDropDown" href="men.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Men's Clothing</a>
-		<a class='dropdown-button btn' data-activates="jewelryDropDown" href="jewelry.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Jewelry</a>
+		<a class='jewelry-dropdown-button btn' data-activates="jewelryDropDown" href="jewelry.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Jewelry</a>
 		<a href="sales.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Sales</a>
 		<a href="events.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Events</a>
 	</div>
@@ -306,11 +311,24 @@
 </footer>
             
 <script>
-	//women dropdown button
+	//dropdown button
 	$('.dropdown-button').dropdown({
 		inDuration: 300,
 		outDuration: 225,
 		constrainWidth: true, // Does not change width of dropdown to that of the activator
+		hover: true, // Activate on hover
+		gutter: 0, // Spacing from edge
+		belowOrigin: true, // Displays dropdown below the button
+		alignment: 'left', // Displays dropdown with edge aligned to the left of button
+		stopPropagation: false // Stops event propagation
+		}
+	);
+	
+	//jewelry dropdown button
+	$('.jewelry-dropdown-button').dropdown({
+		inDuration: 300,
+		outDuration: 225,
+		constrainWidth: false, // Does not change width of dropdown to that of the activator
 		hover: true, // Activate on hover
 		gutter: 0, // Spacing from edge
 		belowOrigin: true, // Displays dropdown below the button
