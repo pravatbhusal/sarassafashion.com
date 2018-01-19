@@ -141,10 +141,10 @@
 						}
 						$itemIcon = $row['picture'];
 						$size = $itemArray[3];
-						//add tax for the price
-						$Price = $Price * (1 + $taxUSD);
+						$tax = ($Price * (1 + $taxUSD)) - $Price;
+						$taxPrice = $Price + $tax;
 							echo '
-							<li id="item_'.$i.'" data-itemName='.$item.' data-itemQuantity='.$quantity.' data-itemPrice='.$Price.' class="collection-item avatar" style="margin-top: 10px; background-color: rgba(0, 0, 0, 0);">
+							<li id="item_'.$i.'" data-itemName='.$item.' data-itemQuantity='.$quantity.' data-itemPrice='.$taxPrice.' class="collection-item avatar" style="margin-top: 10px; background-color: rgba(0, 0, 0, 0);">
 							<div class="row">
 								<div class="col s12 m12 l3">
 								  <i><img class="materialboxed" src="'.$itemIcon.'" style="width: 125px; height: 150px; border-radius: 5px;"></i>
@@ -195,17 +195,23 @@
 						//add the discount, and update the total price
 						$discount = $row["discount_percent"];
 						$discountPrice = $totalPrice * ((100 - $discount)/100);
+						$tax = ($discountPrice * (1 + $taxUSD)) - $discountPrice;
+						$taxTotalDiscountPrice = $discountPrice + $tax;
 						echo '<input type="hidden" name="discount_rate_cart" value="'.$discount.'">';
-						echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$discountPrice.'"><del>$'.$totalPrice.' USD</del> $'.$discountPrice.' USD</h4>';
+						echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$taxTotalDiscountPrice.'"><del>$'.$totalPrice.' USD</del> $'.$discountPrice.' USD + $'.$tax.' USD tax</h4>';
 					} else {
-						echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$totalPrice.'">$'.$totalPrice.' USD</h4>';
+						$tax = ($totalPrice * (1 + $taxUSD)) - $totalPrice;
+						$taxTotalPrice = $totalPrice + $tax;
+						echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$taxTotalPrice.'">$'.$totalPrice.' USD + $'.$tax.' USD tax</h4>';
 					}
 				} else {
-					echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$totalPrice.'">$'.$totalPrice.' USD</h4>';
+					$tax = ($totalPrice * (1 + $taxUSD)) - $totalPrice;
+					$taxTotalPrice = $totalPrice + $tax;
+					echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$taxTotalPrice.'">$'.$totalPrice.' USD + $'.$tax.' USD tax</h4>';
 				}
 			echo '
 				<br>
-				<label style="color: white">Shipping fees may apply</label>
+				<label style="color: white">Shipping fee of $'.$shippingFeeUSD.' USD per item will apply.</label>
 				</form>
 				<form method="POST" action="?">
 				<input name="couponName" class="browser-default" type="text" placeholder="Coupon Code...">
