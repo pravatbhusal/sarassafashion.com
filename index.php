@@ -130,7 +130,7 @@
 	</div>
   
     <!-- Shipping Prices -->
-    <p class="center-align" id="shipping-text">- EVERYDAY FLAT RATE SHIPPING U.S. $<?php echo($shippingFeeUSD);?> -</p>
+    <p class="center-align" id="shipping-text">- EVERYDAY PER ITEM SHIPPING RATE OF U.S. $<?php echo($shippingFeeUSD);?> -</p>
   	
 	<!-- Item Links -->
     <div class="row" align="center">
