@@ -1,9 +1,5 @@
 # SarassA Fashion
-This website was entirely programmed by Pravat Bhusal.  
-An e-commerce website programmed for the SarassA Fashion's business. The website program  
-is rightfully open-source for anybody to utilize and study. Permission was granted by the  
-business owner to open-source this website. Please note that the website files and directories  
-in the live website were re-configured for security reasons.  
+This website was entirely programmed by Pravat Bhusal. An e-commerce website programmed for the SarassA Fashion's business. The website program is rightfully open-source for anybody to utilize and study. Permission was granted by the business owner to open-source this website. Please note that the website files and directories in the live website were re-configured for security reasons.  
 
 # Technologies
 - HTML5
