@@ -8,11 +8,11 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
-	
+
 	<!--jquery, materializejs-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-	
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,7 @@
 	<meta name="author" content="">
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	
+
 	<!--navbar-->
 	<div id="navbarHeader"></div>
 	<div id="navbarTop">
@@ -47,7 +47,7 @@
 			</div>
 		 </form>
 	</div>
-	
+
 	<!--navbar and body white seperation-->
 	<div id="seperator"></div>
 </header>
@@ -99,7 +99,7 @@
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20braclet">Bracelets/Bangels</a></li>
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20necklace">Necklaces</a></li>
 	</ul>
-	
+
 	<!-- Item Buttons -->
 	<div class="row" style="margin-top: 10px;" align="center">
 		<a href="new.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">New Arrivals</a>
@@ -109,36 +109,36 @@
 		<a href="sales.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Sales</a>
 		<a href="events.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Events</a>
 	</div>
-	
+
 	<!-- Items -->
 	<div class="container">
 	<p class="center-align" id="new-title-text">- Search Results -</p>
 	<div class="row center">
-	<?php	
-		include_once("db/dbconnection.php");
-		$foundResult = false;
-		
-		//get queries that contain the search string (MySQL is case-insensitive)
-		$search = $_GET['search'];
-		$queryJewelry = "SELECT * FROM jewelry WHERE name LIKE '%" . $search . "%'";
-		$queryMen = "SELECT * FROM men WHERE name LIKE '%" . $search . "%'";
-		$queryWomen = "SELECT * FROM women WHERE name LIKE '%" . $search . "%'";
-		
-		$results = array();
-		$results[] = mysqli_query($link, $queryWomen);
-		$results[] = mysqli_query($link, $queryJewelry);
-		$results[] = mysqli_query($link, $queryMen);
-		
-		for($i = 0; $i < 3; $i ++) {
-			while($row = mysqli_fetch_array($results[$i])) {	
-				$id = $row['id'];
-				$category = $row['category'];
-				$name = $row['name'];
-				$price = $row['price'];
-				$sizes = $row['sizes'];
-				$description = $row['description'];
-				$picture = $row['picture'];
-				echo '
+	<?php
+        include_once("db/dbconnection.php");
+        $foundResult = false;
+
+        //get queries that contain the search string (MySQL is case-insensitive)
+        $search = $_GET['search'];
+        $queryJewelry = "SELECT * FROM jewelry WHERE name LIKE '%" . $search . "%'";
+        $queryMen = "SELECT * FROM men WHERE name LIKE '%" . $search . "%'";
+        $queryWomen = "SELECT * FROM women WHERE name LIKE '%" . $search . "%'";
+
+        $results = array();
+        $results[] = mysqli_query($link, $queryWomen);
+        $results[] = mysqli_query($link, $queryJewelry);
+        $results[] = mysqli_query($link, $queryMen);
+
+        for ($i = 0; $i < 3; $i ++) {
+            while ($row = mysqli_fetch_array($results[$i])) {
+                $id = $row['id'];
+                $category = $row['category'];
+                $name = $row['name'];
+                $price = $row['price'];
+                $sizes = $row['sizes'];
+                $description = $row['description'];
+                $picture = $row['picture'];
+                echo '
 				<div class="col s12 m6 l6 xl3">
 					<div class="image-container">
 					  <img src="'.$picture.'" class="image">
@@ -154,16 +154,16 @@
 					</div>
 				</div>
 				';
-				$foundResult = true;
-			}
-		}
-		?>	
+                $foundResult = true;
+            }
+        }
+        ?>
 	</div>
-	<?php 
-		if($foundResult == false) {
-			echo '<h5 style="color: white">No results found...</h5>';
-		}
-	?>
+	<?php
+        if ($foundResult == false) {
+            echo '<h5 style="color: white">No results found...</h5>';
+        }
+    ?>
 	</div>
 </main>
 <footer class="page-footer" id="footer-page">
@@ -213,7 +213,7 @@
 				</div>
 			</div>
 </footer>
-            
+
 <script>
 	//dropdown button
 	$('.dropdown-button').dropdown({
@@ -227,7 +227,7 @@
 		stopPropagation: false // Stops event propagation
 		}
 	);
-	
+
 	//jewelry dropdown button
 	$('.jewelry-dropdown-button').dropdown({
 		inDuration: 300,
@@ -240,7 +240,7 @@
 		stopPropagation: false // Stops event propagation
 		}
 	);
-	
+
 	//get number of cart items within the browser
 	function updateNumberOfCartItems() {
 		var numberOfCartItems = 0;

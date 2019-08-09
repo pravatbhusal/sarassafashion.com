@@ -1,24 +1,24 @@
 <html lang="en">
 <body>
 	<header>
-		<title>Admin</title>   
-		<!--style.css, favcon, googlefont, materializecss-->  
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">  	
+		<title>Admin</title>
+		<!--style.css, favcon, googlefont, materializecss-->
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 		
 		<!--jquery, materializejs-->
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-		
-		<meta charset="utf-8"> 
-		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1"> 
-		<meta name="description" content=""> 
-		<meta name="author" content=""> 
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
 		<!--Let browser know website is optimized for mobile-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
-		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 		<!--upload item modal-->
 		<div id="upload-item-modal" class="modal">
 			<div class="modal-content">
@@ -57,7 +57,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!--delete item modal-->
 		<div id="delete-item-modal" class="modal">
 			<div class="modal-content">
@@ -75,7 +75,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!--upload event modal-->
 		<div id="upload-event-modal" class="modal">
 			<div class="modal-content">
@@ -91,7 +91,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!--delete event modal-->
 		<div id="delete-event-modal" class="modal">
 			<div class="modal-content">
@@ -104,7 +104,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!--add coupon modal-->
 		<div id="add-coupon-modal" class="modal">
 			<div class="modal-content">
@@ -119,7 +119,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!--delete coupon modal-->
 		<div id="delete-coupon-modal" class="modal">
 			<div class="modal-content">
@@ -132,7 +132,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!--edit homepage pictures modal-->
 		<div id="edit-homepictures-modal" class="modal">
 			<div class="modal-content">
@@ -153,42 +153,42 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<?php
-		include_once("db/dbconnection.php");
-		
-		if(isset($_POST['password'])) {
-			$password = $_POST['password'];
-		} else {
-			$password = "";	
-		}
-		
-		if($password == $adminPassword) {
-			echo '<div id="adminDiv" style="text-align: center">
+        include_once("db/dbconnection.php");
+
+        if (isset($_POST['password'])) {
+            $password = $_POST['password'];
+        } else {
+            $password = "";
+        }
+
+        if ($password == $adminPassword) {
+            echo '<div id="adminDiv" style="text-align: center">
 			<b><h4 style="color: #e53935;">Admin Control Panel</h4></b>
-			
+
 			<br>
 			<button href="#upload-item-modal" class="modal-trigger btn" style="margin-bottom: 10px;">Upload an item</button>
 			<br>
 			<button href="#delete-item-modal" class="modal-trigger btn" style="margin-bottom: 10px; background-color: #e53935;">Delete an item</button>
 			<br>
-			
+
 			<hr width="500px">
 			<button href="#upload-event-modal" class="modal-trigger btn" style="margin-bottom: 10px;">Add an Event</button>
 			<br>
 			<button href="#delete-event-modal" class="modal-trigger btn" style="margin-bottom: 10px; background-color: #e53935;">Delete an Event</button>
 			<br>
-			
+
 			<hr width="500px">
 			<button href="#add-coupon-modal" class="modal-trigger btn" style="margin-bottom: 10px;">Add a Coupon</button>
 			<br>
 			<button href="#delete-coupon-modal" class="modal-trigger btn" style="margin-bottom: 10px; background-color: #e53935;">Delete a coupon</button>
 			<br>
-			
+
 			<hr width="500px">
 			<button href="#edit-homepictures-modal" class="modal-trigger btn" style="margin-bottom: 10px;">Edit Home Page Pictures</button>
 			<br>
-			
+
 			<hr width="500px">
 			PayPal Email: <input id="email" type="text" style="width: 250px; margin-left: 5px;" value='.$adminEmail.'>
 			<br>
@@ -201,47 +201,47 @@
 			<button onclick="updateSettings()" class="btn">Update Settings</button>
 			<br>
 			<br>
-			
+
 			<hr width="800px">
 			<h6>Emails List (Copy and Paste):</h6>
 			<textarea placeholder="Emails..." style="width: 750px" id="email-list" class="browser-default"></textarea>
 			<p><button onclick="getEmails()" class="btn">Get Emails</button></p>
-			
+
 			<hr>
 			<div class="container">
 			<table>
 				<tr>
 					<th>Coupon Name</th>
-					<th>Expires</th> 
+					<th>Expires</th>
 					<th>Discount Percent</th>
 				</tr>
 			';
-				//add rows for the non-expired coupons
-				$query = "SELECT * FROM coupons WHERE expires > NOW()";
-				$result = mysqli_query($link, $query);
-				while($row = mysqli_fetch_array($result)) {
-					$name = $row['name'];
-					$expires = $row['expires'];
-					$discount = $row['discount_percent'];
-					echo '
+            //add rows for the non-expired coupons
+            $query = "SELECT * FROM coupons WHERE expires > NOW()";
+            $result = mysqli_query($link, $query);
+            while ($row = mysqli_fetch_array($result)) {
+                $name = $row['name'];
+                $expires = $row['expires'];
+                $discount = $row['discount_percent'];
+                echo '
 						<tr>
 						<td>'.$name.'</td>
-						<td>'.$expires.'</td> 
+						<td>'.$expires.'</td>
 						<td>'.$discount.'%</td>
 						</tr>
 					';
-					break;
-				}
-			echo '
+                break;
+            }
+            echo '
 			</table>
 			</div>
-			
+
 			<hr>
 			<a href="index.php">Click here to go back to the home page.</a>
 			</div>
 			';
-		} else if($password != "") {
-			echo '<form style="text-align: center;" method="POST" action="admin.php">
+        } elseif ($password != "") {
+            echo '<form style="text-align: center;" method="POST" action="admin.php">
 			<b><h4 style="color: #e53935;">Admin Panel</h4></b>
 			<br>
 			<p style="color: red; text-align: center;">The password you entered was incorrect!</p>
@@ -252,8 +252,8 @@
 			<br>
 			<a href="index.php">If you are not an Admin, then it is highly advised that you leave this page.</a>
 			</form>';
-		} else {
-			echo '<form style="text-align: center;" method="POST" action="admin.php">
+        } else {
+            echo '<form style="text-align: center;" method="POST" action="admin.php">
 			<b><h4 style="color: #e53935;">Admin Panel</h4></b>
 			<br>
 			<input type="password" name="password" align="center" placeholder="Password" style="width: 500px;"></input>
@@ -262,16 +262,16 @@
 			<br>
 			<a href="index.php">If you are not an Admin, then it is highly advised that you leave this page.</a>
 			</form>';
-		}
-		?>
+        }
+        ?>
 	</header>
-	
+
 	<main>
-		
+
 	</main>
-	
+
 	<footer>
-	
+
 	</footer>
 </body>
 
@@ -288,24 +288,24 @@
 			format: 'yyyy-mm-dd',
 			closeOnSelect: false // Close upon selecting a date,
 		});
-		
+
 		function isNumberKey(evt)
 		{
 			var charCode = (evt.which) ? evt.which : evt.keyCode;
-			if (charCode != 46 && charCode > 31 
+			if (charCode != 46 && charCode > 31
 			&& (charCode < 48 || charCode > 57))
 			 return false;
 
 			return true;
 		}
-		
+
 		//update the admin settings (using ajax to contact the updatesettings.php)
 		function updateSettings() {
 			var email = document.getElementById("email").value;
 			var password = document.getElementById("password").value;
 			var shipping = document.getElementById("shipping").value;
 			var tax = document.getElementById("tax").value;
-			
+
 			var http = new XMLHttpRequest();
 			var location = window.location.href;
 			var directoryPath = location.substring(0, location.lastIndexOf("/")+1);
@@ -324,11 +324,11 @@
 			}
 			http.send(params);
 		}
-		
+
 		//get the emails
 		function getEmails() {
 			var email = document.getElementById("email-list");
-			
+
 			var http = new XMLHttpRequest();
 			var location = window.location.href;
 			var directoryPath = location.substring(0, location.lastIndexOf("/")+1);

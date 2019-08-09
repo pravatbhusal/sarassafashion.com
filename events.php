@@ -8,11 +8,11 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
-	
+
 	<!--jquery, materializejs-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-	
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,7 @@
 	<meta name="author" content="">
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	
+
 	<!--navbar-->
 	<div id="navbarHeader"></div>
 	<div id="navbarTop">
@@ -47,7 +47,7 @@
 			</div>
 		 </form>
 	</div>
-	
+
 	<!--navbar and body white seperation-->
 	<div id="seperator"></div>
 </header>
@@ -99,7 +99,7 @@
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20braclet">Bracelets/Bangels</a></li>
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20necklace">Necklaces</a></li>
 	</ul>
-	
+
 	<!-- Item Buttons -->
 	<div class="row" style="margin-top: 10px;" align="center">
 		<a href="new.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">New Arrivals</a>
@@ -109,30 +109,30 @@
 		<a href="sales.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Sales</a>
 		<a href="events.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Events</a>
 	</div>
-	
+
 	<div class="container" style="margin: auto">
 	<p class="center-align" id="new-title-text">- Events -</p>
   	<!-- Photo Carousel -->
     <div style="margin-bottom: 25px;" class="carousel carousel-slider center" data-indicators="true">
 	<?php
-		require_once("db/dbconnection.php");
-		//gather non-expired events
-		$event = array();
-		$query = "SELECT * FROM events WHERE expires > NOW() ORDER by id DESC";
-		$result = mysqli_query($link, $query);
-		while($row = mysqli_fetch_array($result)) {
-			$event[] = $row;
-		}
-		for($i = 0; $i < count($event); $i++) {
-			$eventId = $event[$i]['id'];
-			$eventExpires = $event[$i]['expires'];
-			$eventName = $event[$i]['name'];
-			$eventPicture = $event[$i]['picture'];
-			echo '<a class="carousel-item" data-id="'.$eventId.' "data-expires="'.$eventExpires.'" data-name="'.$eventName.'"><img src="'.$eventPicture.'"></a>';
-		}
-	?>
+        require_once("db/dbconnection.php");
+        //gather non-expired events
+        $event = array();
+        $query = "SELECT * FROM events WHERE expires > NOW() ORDER by id DESC";
+        $result = mysqli_query($link, $query);
+        while ($row = mysqli_fetch_array($result)) {
+            $event[] = $row;
+        }
+        for ($i = 0; $i < count($event); $i++) {
+            $eventId = $event[$i]['id'];
+            $eventExpires = $event[$i]['expires'];
+            $eventName = $event[$i]['name'];
+            $eventPicture = $event[$i]['picture'];
+            echo '<a class="carousel-item" data-id="'.$eventId.' "data-expires="'.$eventExpires.'" data-name="'.$eventName.'"><img src="'.$eventPicture.'"></a>';
+        }
+    ?>
 	</div>
-	
+
 	<p id="eventName" style="text-align: center; color: white;"></p>
 	<p id="eventExpires" style="text-align: center; color: white;"></p>
 </main>
@@ -183,7 +183,7 @@
 				</div>
 			</div>
 </footer>
-            
+
 <script>
 	//dropdown button
 	$('.dropdown-button').dropdown({
@@ -197,7 +197,7 @@
 		stopPropagation: false // Stops event propagation
 		}
 	);
-	
+
 	//jewelry dropdown button
 	$('.jewelry-dropdown-button').dropdown({
 		inDuration: 300,
@@ -210,7 +210,7 @@
 		stopPropagation: false // Stops event propagation
 		}
 	);
-	
+
   $('.carousel.carousel-slider').carousel({
 	onCycleTo: function(data) {
 		//set event's texts to equal to the event's name and id when the carousel is scrolling
@@ -227,7 +227,7 @@
 		}
 	}
   });
-  
+
 	//get number of cart items within the browser
 	function updateNumberOfCartItems() {
 		var numberOfCartItems = 0;

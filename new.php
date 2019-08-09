@@ -8,11 +8,11 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
-	
+
 	<!--jquery, materializejs-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-	
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,7 @@
 	<meta name="author" content="">
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	
+
 	<!--navbar-->
 	<div id="navbarHeader"></div>
 	<div id="navbarTop">
@@ -47,7 +47,7 @@
 			</div>
 		 </form>
 	</div>
-	
+
 	<!--navbar and body white seperation-->
 	<div id="seperator"></div>
 </header>
@@ -99,7 +99,7 @@
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20braclet">Bracelets/Bangels</a></li>
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20necklace">Necklaces</a></li>
 	</ul>
-	
+
 	<!-- Item Buttons -->
 	<div class="row" style="margin-top: 10px;" align="center">
 		<a href="new.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">New Arrivals</a>
@@ -109,30 +109,30 @@
 		<a href="sales.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Sales</a>
 		<a href="events.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Events</a>
 	</div>
-	
+
 	<!-- Items -->
 	<div class="container">
 	<p class="center-align" id="new-title-text">- New Arrivals -</p>
 	<div class="row center">
-	<?php	
-	$item = array();
-	include_once("db/dbconnection.php");
-	//limit to 36 newest items
-	$query = "SELECT * FROM new ORDER by id DESC LIMIT 36";
-	$result = mysqli_query($link, $query);
-	while($row = mysqli_fetch_array($result)) {
-		$item[] = $row;
-	}
-	for($i = 0; $i < count($item); $i++) {
-		$categoryid = $item[$i]['categoryid'];
-		$category = $item[$i]['category'];
-		$name = $item[$i]['name'];
-		$price = $item[$i]['price'];
-		$saleprice = $item[$i]['saleprice'];
-		$sizes = $item[$i]['sizes'];
-		$description = $item[$i]['description'];
-		$picture = $item[$i]['picture'];
-		echo '
+	<?php
+    $item = array();
+    include_once("db/dbconnection.php");
+    //limit to 36 newest items
+    $query = "SELECT * FROM new ORDER by id DESC LIMIT 36";
+    $result = mysqli_query($link, $query);
+    while ($row = mysqli_fetch_array($result)) {
+        $item[] = $row;
+    }
+    for ($i = 0; $i < count($item); $i++) {
+        $categoryid = $item[$i]['categoryid'];
+        $category = $item[$i]['category'];
+        $name = $item[$i]['name'];
+        $price = $item[$i]['price'];
+        $saleprice = $item[$i]['saleprice'];
+        $sizes = $item[$i]['sizes'];
+        $description = $item[$i]['description'];
+        $picture = $item[$i]['picture'];
+        echo '
 		<div class="col s12 m6 l6 xl3">
 			<div class="image-container">
 			  <img src="'.$picture.'" class="image">
@@ -141,30 +141,30 @@
 			  </div>
 			  <div class="image-price">
 		';
-				//check if the item as a sale price
-				if($saleprice > 0) {
-					echo '<del>$'.$price.' USD</del> $'.$saleprice.' USD';
-					echo '</div>';
-					echo '<span class="new badge green" data-badge-caption="Sale!"></span>';
-				} else {
-					echo '$'.$price.' USD';
-					echo '</div>';
-				}
-		echo '
+        //check if the item has a sale price
+        if ($saleprice > 0) {
+            echo '<del>$'.$price.' USD</del> $'.$saleprice.' USD';
+            echo '</div>';
+            echo '<span class="new badge green" data-badge-caption="Sale!"></span>';
+        } else {
+            echo '$'.$price.' USD';
+            echo '</div>';
+        }
+        echo '
 			  <a href="view.php?category='.$category.'&id='.$categoryid.'"><div class="image-button">
 				<div class="image-text">Choose Options</div>
 			  </div></a>
 			</div>
 		</div>
 		';
-	}
-	?>
+    }
+    ?>
 	</div>
-	<?php 
-		if(count($item) <= 0) {
-			echo '<h5 style="color: white">No results found...</h5>';
-		}
-	?>
+	<?php
+        if (count($item) <= 0) {
+            echo '<h5 style="color: white">No results found...</h5>';
+        }
+    ?>
 	</div>
 </main>
 <footer class="page-footer" id="footer-page">
@@ -214,7 +214,7 @@
 				</div>
 			</div>
 </footer>
-            
+
 <script>
 	//dropdown button
 	$('.dropdown-button').dropdown({
@@ -228,7 +228,7 @@
 		stopPropagation: false // Stops event propagation
 		}
 	);
-	
+
 	//jewelry dropdown button
 	$('.jewelry-dropdown-button').dropdown({
 		inDuration: 300,

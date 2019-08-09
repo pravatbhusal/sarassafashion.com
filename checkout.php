@@ -8,7 +8,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
-	
+
 	<!--jquery, materializejs-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
@@ -24,7 +24,7 @@
 				items.push({number: itemNumber, name: itemName, quantity: itemQuantity, price: itemPrice});
 			}
 	</script>
-	
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,7 +32,7 @@
 	<meta name="author" content="">
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	
+
 	<!--navbar-->
 	<div id="navbarHeader"></div>
 	<div id="navbarTop">
@@ -53,7 +53,7 @@
 			</div>
 		 </form>
 	</div>
-	
+
 	<!--navbar and body white seperation-->
 	<div id="seperator"></div>
 </header>
@@ -105,7 +105,7 @@
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20braclet">Bracelets/Bangels</a></li>
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20necklace">Necklaces</a></li>
 	</ul>
-	
+
 	<!-- Item Buttons -->
 	<div class="row" style="margin-top: 10px;" align="center">
 		<a href="new.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">New Arrivals</a>
@@ -115,35 +115,35 @@
 		<a href="sales.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Sales</a>
 		<a href="events.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Events</a>
 	</div>
-	
+
 	<!-- Checkout -->
 	<div class="container" id="itemContainer">
 		<ul class="collection" style="background-color: rgba(0, 0, 0, 0); border: none;">
-			<?php 
-				include_once("db/dbconnection.php");
-				$containsItems = false;
-				$i = 0;
-				$totalPrice = 0;
-				foreach ($_COOKIE as $item=>$quantity) {
-					//check if the cookie is one of the items
-					if(strpos($item, 'item_') !== false) {
-						$itemArray = explode("_", $item); //0 = "item", 1 = id, 2 = item category, 3 = size
-						$query = "SELECT * FROM " . $itemArray[2] . " WHERE id = " . $itemArray[1];
-						$result = mysqli_query($link, $query);
-						
-						$row = mysqli_fetch_array($result);
-						$itemId = $itemArray[1];
-						$itemName = $row['name'];
-						$Price = $row['price'];
-						//if there's a saleprice, then set that as the price
-						if($row['saleprice'] > 0) {
-							$Price = $row['saleprice'];
-						}
-						$itemIcon = $row['picture'];
-						$size = $itemArray[3];
-						$tax = ($Price * (1 + $taxUSD)) - $Price;
-						$taxPrice = $Price + $tax;
-							echo '
+			<?php
+                include_once("db/dbconnection.php");
+                $containsItems = false;
+                $i = 0;
+                $totalPrice = 0;
+                foreach ($_COOKIE as $item=>$quantity) {
+                    //check if the cookie is one of the items
+                    if (strpos($item, 'item_') !== false) {
+                        $itemArray = explode("_", $item); //0 = "item", 1 = id, 2 = item category, 3 = size
+                        $query = "SELECT * FROM " . $itemArray[2] . " WHERE id = " . $itemArray[1];
+                        $result = mysqli_query($link, $query);
+
+                        $row = mysqli_fetch_array($result);
+                        $itemId = $itemArray[1];
+                        $itemName = $row['name'];
+                        $Price = $row['price'];
+                        //if there's a saleprice, then set that as the price
+                        if ($row['saleprice'] > 0) {
+                            $Price = $row['saleprice'];
+                        }
+                        $itemIcon = $row['picture'];
+                        $size = $itemArray[3];
+                        $tax = ($Price * (1 + $taxUSD)) - $Price;
+                        $taxPrice = $Price + $tax;
+                        echo '
 							<li id="item_'.$i.'" data-itemName='.$item.' data-itemQuantity='.$quantity.' data-itemPrice='.$taxPrice.' class="collection-item avatar" style="margin-top: 10px; background-color: rgba(0, 0, 0, 0);">
 							<div class="row">
 								<div class="col s12 m12 l3">
@@ -156,24 +156,24 @@
 								  <p><a onclick="removeCart('.$i.')" class="waves-effect waves-light btn" style="background: black;">Remove</a></p>
 								</div>
 							</div>
-							</li>'; 
-							
-							echo '<script type="text/javascript">',
-								 'newItem('.$i.');',
-								 '</script>';
-								 
-						$containsItems = true;
-						$totalPrice += $Price * $quantity;
-						$i++;
-					}
-				}
-			?>
+							</li>';
+
+                        echo '<script type="text/javascript">',
+                                 'newItem('.$i.');',
+                                 '</script>';
+
+                        $containsItems = true;
+                        $totalPrice += $Price * $quantity;
+                        $i++;
+                    }
+                }
+            ?>
 		</ul>
 		<?php
-			if($containsItems == false) {
-				echo '<h5 style="color: white">Your cart is empty!</h5>';	
-			} else {
-				echo '
+            if ($containsItems == false) {
+                echo '<h5 style="color: white">Your cart is empty!</h5>';
+            } else {
+                echo '
 				<form id="paypalForm" method="POST" action="https://www.paypal.com/cgi-bin/webscr">
 				<button id="paypalBTN" onclick="paypalCheckOut('.$shippingFeeUSD.')" style="float: left; background-color: #0c0c0c;" class="btn waves-effect waves-light" value="PayPal">
 					Purchase
@@ -183,33 +183,33 @@
 				<input type="hidden" name="upload" value="1">
 				<input type="hidden" name="business" value="'.$adminEmail.'">
 			';
-				//check if the customer used a discount code, and check if it's an existing coupon code
-				if(isset($_POST["couponName"])) {
-					$coupon = $_POST["couponName"];
-					$query = "SELECT * FROM coupons WHERE name='$coupon' AND expires > NOW()";
-					$result = mysqli_query($link, $query);
-					$row = mysqli_fetch_array($result);
-					
-					//if the customer used a real coupon value, if not then don't give them a discount
-					if(isset($row)) {
-						//add the discount, and update the total price
-						$discount = $row["discount_percent"];
-						$discountPrice = $totalPrice * ((100 - $discount)/100);
-						$tax = ($discountPrice * (1 + $taxUSD)) - $discountPrice;
-						$taxTotalDiscountPrice = $discountPrice + $tax;
-						echo '<input type="hidden" name="discount_rate_cart" value="'.$discount.'">';
-						echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$taxTotalDiscountPrice.'"><del>$'.$totalPrice.' USD</del> $'.$discountPrice.' USD + $'.$tax.' USD tax</h4>';
-					} else {
-						$tax = ($totalPrice * (1 + $taxUSD)) - $totalPrice;
-						$taxTotalPrice = $totalPrice + $tax;
-						echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$taxTotalPrice.'">$'.$totalPrice.' USD + $'.$tax.' USD tax</h4>';
-					}
-				} else {
-					$tax = ($totalPrice * (1 + $taxUSD)) - $totalPrice;
-					$taxTotalPrice = $totalPrice + $tax;
-					echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$taxTotalPrice.'">$'.$totalPrice.' USD + $'.$tax.' USD tax</h4>';
-				}
-			echo '
+                //check if the customer used a discount code, and check if it's an existing coupon code
+                if (isset($_POST["couponName"])) {
+                    $coupon = $_POST["couponName"];
+                    $query = "SELECT * FROM coupons WHERE name='$coupon' AND expires > NOW()";
+                    $result = mysqli_query($link, $query);
+                    $row = mysqli_fetch_array($result);
+
+                    //if the customer used a real coupon value, if not then don't give them a discount
+                    if (isset($row)) {
+                        //add the discount, and update the total price
+                        $discount = $row["discount_percent"];
+                        $discountPrice = $totalPrice * ((100 - $discount)/100);
+                        $tax = ($discountPrice * (1 + $taxUSD)) - $discountPrice;
+                        $taxTotalDiscountPrice = $discountPrice + $tax;
+                        echo '<input type="hidden" name="discount_rate_cart" value="'.$discount.'">';
+                        echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$taxTotalDiscountPrice.'"><del>$'.$totalPrice.' USD</del> $'.$discountPrice.' USD + $'.$tax.' USD tax</h4>';
+                    } else {
+                        $tax = ($totalPrice * (1 + $taxUSD)) - $totalPrice;
+                        $taxTotalPrice = $totalPrice + $tax;
+                        echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$taxTotalPrice.'">$'.$totalPrice.' USD + $'.$tax.' USD tax</h4>';
+                    }
+                } else {
+                    $tax = ($totalPrice * (1 + $taxUSD)) - $totalPrice;
+                    $taxTotalPrice = $totalPrice + $tax;
+                    echo '<h4 style="color: white; display: inline; margin-left: 10px;" id="totalPrice" data-totalPrice="'.$taxTotalPrice.'">$'.$totalPrice.' USD + $'.$tax.' USD tax</h4>';
+                }
+                echo '
 				<br>
 				<label style="color: white">Shipping fee of $'.$shippingFeeUSD.' USD per item will apply.</label>
 				</form>
@@ -218,8 +218,8 @@
 				<button id="couponBTN" type="submit" style="margin-bottom: 10px;">Apply Coupon</button>
 				</form>
 				';
-			}
-		?>
+            }
+        ?>
 	</div>
 </main>
 <footer class="page-footer" id="footer-page">
@@ -269,7 +269,7 @@
 				</div>
 			</div>
 </footer>
-            
+
 <script>
 	//dropdown button
 	$('.dropdown-button').dropdown({
@@ -283,7 +283,7 @@
 		stopPropagation: false // Stops event propagation
 		}
 	);
-	
+
 	//jewelry dropdown button
 	$('.jewelry-dropdown-button').dropdown({
 		inDuration: 300,
@@ -296,10 +296,10 @@
 		stopPropagation: false // Stops event propagation
 		}
 	);
-	
+
 	function paypalCheckOut(shippingCost) {
 		//add the paypal form information based on the number of items in the array
-		for (var i = 0; i < items.length; i ++) {						
+		for (var i = 0; i < items.length; i ++) {
 			document.getElementById("paypalForm").innerHTML += '<input form="paypalForm" type="hidden" name="item_name_' + (i + 1) + '" value="' + items[i].name + '">';
 			document.getElementById("paypalForm").innerHTML += '<input form="paypalForm" type="hidden" name="amount_' + (i + 1) + '" value="' + items[i].price + '">';
 			document.getElementById("paypalForm").innerHTML += '<input form="paypalForm" type="hidden" name="quantity_' + (i + 1) + '" value="' + items[i].quantity + '">';
@@ -317,7 +317,7 @@
 		var item = document.getElementById("item_" + itemNumber);
 		var itemName = item.getAttribute("data-itemName");
 		delete_cookie(itemName);
-		
+
 		//reload page to update the cart's total prices
 		location.reload();
 	}

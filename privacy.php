@@ -8,7 +8,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
-	
+
 	<!--jquery, materializejs-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
@@ -33,7 +33,7 @@
 	<meta name="author" content="">
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	
+
 	<!--navbar-->
 	<div id="navbarHeader"></div>
 	<div id="navbarTop">
@@ -60,7 +60,7 @@
 			</div>
 		 </form>
 	</div>
-	
+
 	<!--navbar and body white seperation-->
 	<div id="seperator"></div>
 </header>
@@ -112,7 +112,7 @@
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20braclet">Bracelets/Bangels</a></li>
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20necklace">Necklaces</a></li>
 	</ul>
-	
+
 	<!-- Item Buttons -->
 	<div class="row" style="margin-top: 10px;" align="center">
 		<a href="new.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">New Arrivals</a>
@@ -122,11 +122,11 @@
 		<a href="sales.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Sales</a>
 		<a href="events.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Events</a>
 	</div>
-	
+
 	<div class="container">
 	<h3>SarassA Fashion's Privacy Policy</h3>
 	</p>
-	
+
 	<p>
 	This policy covers how The SarassA Company treats personal information that The SarassA Company
 	collects and receives, including information related to your past use of The SarassA Company
@@ -220,7 +220,7 @@
 
 	<p>This Agreement sets forth the entire understanding and agreement between you and The SarassA Company with respect to the subject matter hereof. The section headings used herein, including descriptive summary sentences at the start of each section, are for convenience only and shall not affect the interpretation of this Agreement. If any provision of this Agreement shall be held by a court of competent jurisdiction to be unlawful, void, or for any reason unenforceable, then in such jurisdiction that provision shall be deemed severable from these terms and shall not affect the validity and enforceability of the remaining provisions.</p>
 
-	<p>The SarassA Company may give notice to you by means of a general notice on our website, through the SarassA Fashion Client at or after log-in to your Account, by electronic mail to your e-mail address in our records for your Account, or by written communication sent by first class mail, postage prepaid, or overnight courier to your address on record for your Account. All notices given by you or required under this Agreement shall be faxed to The SarassA Company Legal Department, Attn: Dispute Resolution, at: TBA; or mailed to us at: TBA.</p>          
+	<p>The SarassA Company may give notice to you by means of a general notice on our website, through the SarassA Fashion Client at or after log-in to your Account, by electronic mail to your e-mail address in our records for your Account, or by written communication sent by first class mail, postage prepaid, or overnight courier to your address on record for your Account. All notices given by you or required under this Agreement shall be faxed to The SarassA Company Legal Department, Attn: Dispute Resolution, at: TBA; or mailed to us at: TBA.</p>
 
 	<p><b>Changes to this Privacy Policy</b></p>
 	<p>The SarassA Company may update this policy. We will notify you about significant changes in
@@ -280,7 +280,7 @@
 				</div>
 			</div>
 </footer>
-            
+
 <script>
 	//dropdown button
 	$('.dropdown-button').dropdown({
@@ -294,7 +294,7 @@
 		stopPropagation: false // Stops event propagation
 		}
 	);
-	
+
 	//jewelry dropdown button
 	$('.jewelry-dropdown-button').dropdown({
 		inDuration: 300,
@@ -307,7 +307,7 @@
 		stopPropagation: false // Stops event propagation
 		}
 	);
-	
+
 	//get number of cart items within the browser
 	function updateNumberOfCartItems() {
 		var numberOfCartItems = 0;

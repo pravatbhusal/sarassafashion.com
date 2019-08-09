@@ -15,4 +15,3 @@ $adminEmail = $row["email"];
 $adminPassword = $row["password"];
 $shippingFeeUSD = $row["shipping"];
 $taxUSD = $row["tax"];
-?>

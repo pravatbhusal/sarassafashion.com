@@ -8,11 +8,11 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
-	
+
 	<!--jquery, materializejs-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-	
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,7 @@
 	<meta name="author" content="">
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	
+
 	<!--navbar-->
 	<div id="navbarHeader"></div>
 	<div id="navbarTop">
@@ -47,7 +47,7 @@
 			</div>
 		 </form>
 	</div>
-	
+
 	<!--navbar and body white seperation-->
 	<div id="seperator"></div>
 </header>
@@ -99,7 +99,7 @@
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20braclet">Bracelets/Bangels</a></li>
 		<li style="background-color: white;"><a style="color: black;" href="search.php?search=cz%20necklace">Necklaces</a></li>
 	</ul>
-	
+
 	<!-- Item Buttons -->
 	<div class="row" style="margin-top: 10px;" align="center">
 		<a href="new.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">New Arrivals</a>
@@ -109,27 +109,27 @@
 		<a href="sales.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Sales</a>
 		<a href="events.php" style="margin-right: 20px;" class="waves-effect waves-light btn" id="link-btn">Events</a>
 	</div>
-	
+
 	<div class="container">
 		<?php
-			include_once("db/dbconnection.php");
-			$category = $_GET['category'];
-			$id = $_GET['id'];
-			
-			$query = "SELECT * FROM " . $category . " WHERE id=" . $id;
-			$result = mysqli_query($link, $query);
-			$item = mysqli_fetch_array($result);
-			
-			$id = $item['id'];
-			$name = $item['name'];
-			$capitalCategory = ucfirst($category);
-			$price = $item['price'];
-			$saleprice = $item['saleprice'];
-			$sizes = explode(",", $item['sizes']);
-			$description = $item['description'];
-			$picture = $item['picture'];
-			
-			echo '
+            include_once("db/dbconnection.php");
+            $category = $_GET['category'];
+            $id = $_GET['id'];
+
+            $query = "SELECT * FROM " . $category . " WHERE id=" . $id;
+            $result = mysqli_query($link, $query);
+            $item = mysqli_fetch_array($result);
+
+            $id = $item['id'];
+            $name = $item['name'];
+            $capitalCategory = ucfirst($category);
+            $price = $item['price'];
+            $saleprice = $item['saleprice'];
+            $sizes = explode(",", $item['sizes']);
+            $description = $item['description'];
+            $picture = $item['picture'];
+
+            echo '
 			<div class="row center">
 				<div class="col s12 m12 l5 xl5">
 					<img class="materialboxed" src="'.$picture.'" width="310" height="400">
@@ -139,23 +139,23 @@
 					<h4 class="left-align" data-id="'.$id.'" data-category="'.$category.'" id="item-title-text">'.$name.' - '.$capitalCategory.'</h4>
 					<h4 class="left-align" id="price-item-text">
 			';
-					//check if the item as a sale price
-					if($saleprice > 0) {
-						echo '<del>$'.$price.' USD</del> $'.$saleprice.' USD';
-					} else {
-						echo '$'.$price.' USD';
-					}
-			echo '
+                    //check if the item has a sale price
+                    if ($saleprice > 0) {
+                        echo '<del>$'.$price.' USD</del> $'.$saleprice.' USD';
+                    } else {
+                        echo '$'.$price.' USD';
+                    }
+            echo '
 					</h4>
 					<h4 class="left-align" id="sub-item-text">Size:</h4>
 					<select id="sizeValue" class="browser-default">
 						<option value="0" disabled selected>- Please choose a size -</option>
 			';
-					//add options for the available sizes
-					for($i = 0; $i < count($sizes); $i++) {
-						echo '<option value="'.$sizes[$i].'">'.$sizes[$i].'</option>';
-					}
-			echo '
+                    //add options for the available sizes
+                    for ($i = 0; $i < count($sizes); $i++) {
+                        echo '<option value="'.$sizes[$i].'">'.$sizes[$i].'</option>';
+                    }
+            echo '
 					</select>
 					<br>
 					<h4 class="left-align" id="sub-item-text">Quantity:</h4>
@@ -202,7 +202,7 @@
 				</div>
 			</div>
 			';
-		?>
+        ?>
 		<div class="left-align">
 			<a target="_blank" href="https://www.facebook.com/sarassafashion" style="margin-right: 5px"><img width="18" height="18" src="rsrc/index/facebook.png"></a>
 			<a target="_blank" href="https://www.instagram.com/sarassa_official/" style="margin-right: 5px"><img width="18" height="18" src="rsrc/index/instagram.png"></a>
@@ -257,7 +257,7 @@
 				</div>
 			</div>
 </footer>
-            
+
 <script>
 	//dropdown button
 	$('.dropdown-button').dropdown({
@@ -271,7 +271,7 @@
 		stopPropagation: false // Stops event propagation
 		}
 	);
-	
+
 	//jewelry dropdown button
 	$('.jewelry-dropdown-button').dropdown({
 		inDuration: 300,
@@ -284,7 +284,7 @@
 		stopPropagation: false // Stops event propagation
 		}
 	);
-	
+
 	//get number of cart items within the browser
 	function updateNumberOfCartItems() {
 		var numberOfCartItems = 0;
@@ -292,9 +292,9 @@
 		//set the number of items in the cart
 		document.getElementById('cart-number').innerHTML = numberOfCartItems;
 	}
-	
+
 	updateNumberOfCartItems();
-	
+
 	//addCart function to add items into the cart
 	function addCart(itemId) {
 		//get the information of the item wanting to be purchased

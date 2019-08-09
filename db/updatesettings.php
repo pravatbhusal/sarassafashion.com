@@ -10,4 +10,3 @@ $query = "UPDATE admin SET email='$email', password='$password', shipping='$ship
 mysqli_query($link, $query) or die("Failed to query the admin settings...");
 
 exit("Successfully updated the admin settings!");
-?>

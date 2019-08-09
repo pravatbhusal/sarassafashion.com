@@ -5,8 +5,7 @@ include("dbconnection.php");
 $query = "SELECT * FROM newsletter";
 $result = mysqli_query($link, $query);
 $emails = "";
-while($row = mysqli_fetch_array($result)) {
-	$emails .= $row["email"] . ",";
+while ($row = mysqli_fetch_array($result)) {
+    $emails .= $row["email"] . ",";
 }
 exit($emails);
-?>
